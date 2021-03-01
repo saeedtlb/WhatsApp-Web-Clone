@@ -56,7 +56,7 @@
   border: 2px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   font-size: 18px;
-  margin: 5px 0 20px;
+  margin: 5px 0;
   padding: 0 15px;
   outline: none;
 }
@@ -70,8 +70,26 @@
   font-weight: bold;
   font-size: 20px;
   border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  -webkit-box-shadow: 0 8px #000;
+          box-shadow: 0 8px #000;
+  -webkit-transition: all 0.1s ease;
+  transition: all 0.1s ease;
 }
 
+.right button:active {
+  -webkit-box-shadow: 0 2px #000;
+          box-shadow: 0 2px #000;
+}
+
+.right .error {
+  overflow: hidden;
+  color: red;
+  margin-bottom: 10px;
+}
+
+/******************************  svg animation  ********************************/
 .blink {
   -webkit-transform-origin: center;
           transform-origin: center;
