@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 
-import Router from './router'
+import Routes from './router'
 
-ReactDom.render(<Router />, document.querySelector('#root'))
+import './styles/Css/index.css'
+
+ReactDom.render(<Routes />, document.querySelector('#root'))
