@@ -1,6 +1,7 @@
 const initialStore = {
   name: '',
-  users: []
+  users: [{ name: 'ali' }, { name: 'saeed' }],
+  error: false
 }
 
 export default initialStore
