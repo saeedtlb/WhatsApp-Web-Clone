@@ -1,10 +1,18 @@
 import React from 'react'
 
+// components
+import Header from './Header'
+import ChatPanel from './ChatPanel'
+
+// style
+import '../../styles/Css/chat.css'
+
 const Chat = () => {
   return (
-    <div>
-      <h1>chat</h1>
-    </div>
+    <main>
+      <Header />
+      <ChatPanel />
+    </main>
   )
 }
 
