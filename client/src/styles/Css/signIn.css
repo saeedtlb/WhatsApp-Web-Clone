@@ -70,8 +70,6 @@
   font-weight: bold;
   font-size: 20px;
   border-radius: 5px;
-  outline: none;
-  cursor: pointer;
   -webkit-box-shadow: 0 8px #000;
           box-shadow: 0 8px #000;
   -webkit-transition: all 0.1s ease;
