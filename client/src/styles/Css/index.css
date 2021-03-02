@@ -13,4 +13,9 @@ html,
   overflow: hidden;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+input {
+  outline: none;
+  cursor: pointer;
+}
 /*# sourceMappingURL=index.css.map */
