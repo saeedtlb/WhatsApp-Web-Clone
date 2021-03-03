@@ -6,7 +6,7 @@ const UserIcon = ({ name, url, additional, status }) => {
   return (
     <div className={`userBox ${additional && additional}`}>
       <div className="text">
-        <h2>{name}</h2>
+        <h3>{name}</h3>
         <span>{status}</span>
       </div>
       <div className="icon" style={{ backgroundColor: '#' + randomColor() }}>
