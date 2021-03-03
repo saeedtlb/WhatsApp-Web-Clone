@@ -17,11 +17,13 @@ const Header = () => {
           <div className="search">
             <input type="text" name="search" placeholder="Search messages" autoComplete="off" />
           </div>
-          <UserIcon name="saeed" />
+          <div className="user">
+            <UserIcon name="saeed" />
+          </div>
         </div>
         <div className="bottom">
           <div className="chat_user">
-            <UserIcon name="maren mango" additional="reverse" status="online" />
+            <UserIcon name="maren mango" status="online" />
           </div>
           <div className="icons">
             <div className="call">
