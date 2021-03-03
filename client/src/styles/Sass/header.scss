@@ -24,6 +24,14 @@ header {
       align-items: center;
     }
 
+    .user {
+      justify-self: end;
+
+      .left {
+        flex-direction: row-reverse;
+      }
+    }
+
     .bottom .chat_user {
       grid-column: 2;
       justify-self: flex-start;
