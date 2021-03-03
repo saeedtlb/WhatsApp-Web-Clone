@@ -5,6 +5,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  justify-self: end;
   gap: 10px;
   text-transform: capitalize;
   color: #fff;

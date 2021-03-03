@@ -20,7 +20,7 @@ header {
     & > div {
       display: grid;
       grid-template-columns: 1fr 2fr 1fr;
-      justify-items: center;
+      justify-items: flex-start;
       align-items: center;
     }
 
@@ -59,9 +59,10 @@ header {
     }
 
     .icons {
-      width: 40%;
+      width: 30%;
       display: flex;
-      justify-content: space-around;
+      justify-self: end;
+      justify-content: space-between;
 
       & > div {
         width: 25px;
