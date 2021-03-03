@@ -1,8 +1,10 @@
 import React from 'react'
-// style
-import '../../../styles/Css/contacts.css'
+// helper
+import UserIcon from '../../misc/UserIcon'
 // icon
 import addMore from '../../../styles/icons/addMore.png'
+// style
+import '../../../styles/Css/contacts.css'
 
 const Contacts = () => {
   return (
@@ -15,7 +17,13 @@ const Contacts = () => {
         <h4>unread only</h4>
       </div>
 
-      <div className="contacts__box"></div>
+      <div className="contacts__box">
+        <UserIcon
+          name="kaiya rhiel madsen"
+          text="I need a link to the predifined that and be aware of what you gonna do in future"
+          type="message"
+        />
+      </div>
 
       <div className="bottom">
         <h2>You've reached the end.</h2>
