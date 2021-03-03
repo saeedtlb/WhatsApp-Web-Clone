@@ -5,19 +5,36 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  justify-self: end;
+  gap: 10px;
+}
+
+.userBox__left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 10px;
   text-transform: capitalize;
   color: #fff;
 }
 
-.userBox .text span {
+.userBox__left .text {
+  max-width: 200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.userBox__left .text span {
   font-size: 12px;
 }
 
-.userBox .icon {
+.userBox__left .icon {
   width: 50px;
   height: 50px;
+  color: #fff !important;
   border-radius: 100%;
   text-transform: uppercase;
   display: -webkit-box;
@@ -34,17 +51,23 @@
   overflow: hidden;
 }
 
-.userBox .icon img {
+.userBox__left .icon img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.reverse {
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: row-reverse;
-          flex-direction: row-reverse;
+.userBox__right {
+  text-align: center;
+  line-height: 1.5rem;
+}
+
+.userBox__right .unread {
+  margin-top: 5px;
+  background-color: #1ebe71;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 50%;
 }
 /*# sourceMappingURL=userIcon.css.map */
