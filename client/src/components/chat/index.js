@@ -4,12 +4,9 @@ import React from 'react'
 import Header from './Header'
 import ChatPanel from './ChatPanel'
 
-// style
-import '../../styles/Css/chat.css'
-
 const Chat = () => {
   return (
-    <main>
+    <main style={{ height: '100%' }}>
       <Header />
       <ChatPanel />
     </main>

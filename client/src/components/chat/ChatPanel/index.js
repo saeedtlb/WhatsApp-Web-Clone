@@ -1,5 +1,8 @@
 import React from 'react'
 
+// style
+import '../../../styles/Css/chat.css'
+
 const ChatPanel = () => {
   return (
     <div className="chat__panel">
