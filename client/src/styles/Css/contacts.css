@@ -1,0 +1,17 @@
+.contacts {
+  -webkit-transform: translateY(-70px);
+          transform: translateY(-70px);
+  background: #fff;
+  padding: 10px 15px;
+  border-radius: 15px;
+}
+
+.contacts .bottom {
+  text-align: center;
+}
+
+.contacts .bottom h3 {
+  margin: 15px;
+  color: #1ebe71;
+}
+/*# sourceMappingURL=contacts.css.map */

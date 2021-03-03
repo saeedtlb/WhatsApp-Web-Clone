@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,SAAS,CAAC;EACR,SAAS,EAAE,iBAAiB;EAC5B,UAAU,EAAE,IAAI;EAChB,OAAO,EAAE,SAAS;EAClB,aAAa,EAAE,IAAI;CAUpB;;AAdD,AAME,SANO,CAMP,OAAO,CAAC;EACN,UAAU,EAAE,MAAM;CAMnB;;AAbH,AASI,SATK,CAMP,OAAO,CAGL,EAAE,CAAC;EACD,MAAM,EAAE,IAAI;EACZ,KAAK,ECbM,OAAO;CDcnB",
+    "sources": [
+        "../Sass/contacts.scss",
+        "../Sass/_vars.scss"
+    ],
+    "names": [],
+    "file": "contacts.css"
+}

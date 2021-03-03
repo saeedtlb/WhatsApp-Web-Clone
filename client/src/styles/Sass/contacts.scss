@@ -1,0 +1,17 @@
+@import 'vars';
+
+.contacts {
+  transform: translateY(-70px);
+  background: #fff;
+  padding: 10px 15px;
+  border-radius: 15px;
+
+  .bottom {
+    text-align: center;
+
+    h3 {
+      margin: 15px;
+      color: $whatsApp_color;
+    }
+  }
+}
