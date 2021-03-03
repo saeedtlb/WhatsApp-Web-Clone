@@ -20,7 +20,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 
   label {
     width: 70px;
@@ -62,9 +62,13 @@
 }
 
 .contacts__box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  .userBox {
+    justify-content: space-between;
+    margin: 10px 0;
+    &__left {
+      color: black;
+    }
+  }
 }
 
 .contacts .bottom {

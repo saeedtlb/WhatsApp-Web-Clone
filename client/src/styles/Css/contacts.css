@@ -14,7 +14,7 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 }
 
 .contacts .filter label {
@@ -68,16 +68,15 @@
   text-transform: capitalize;
 }
 
-.contacts__box {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.contacts__box .userBox {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  margin: 10px 0;
+}
+
+.contacts__box .userBox__left {
+  color: black;
 }
 
 .contacts .bottom {
