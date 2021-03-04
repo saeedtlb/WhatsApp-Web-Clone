@@ -10,9 +10,12 @@
 }
 
 .contacts {
+  height: 108%;
   transform: translateY(-70px);
   background: #fff;
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .contacts .filter {
@@ -62,6 +65,8 @@
 }
 
 .contacts__box {
+  flex: 0.95;
+  overflow-y: scroll;
   .userBox {
     justify-content: space-between;
     transition: background-color 0.6s ease;
