@@ -1,8 +1,8 @@
 .chat__panel {
-  height: 100%;
+  height: 85%;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 100px 1fr 3fr 100px;
-      grid-template-columns: 100px 1fr 3fr 100px;
+  -ms-grid-columns: 100px 1fr 4fr 100px;
+      grid-template-columns: 100px 1fr 4fr 100px;
 }
 /*# sourceMappingURL=chat.css.map */
