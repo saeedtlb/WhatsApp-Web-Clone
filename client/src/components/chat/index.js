@@ -4,13 +4,11 @@ import React from 'react'
 import Header from './Header'
 import ChatPanel from './chatPanel'
 
-const Chat = () => {
-  return (
-    <main style={{ height: '100%' }}>
-      <Header />
-      <ChatPanel />
-    </main>
-  )
-}
+const Chat = () => (
+  <main style={{ height: '100%' }}>
+    <Header />
+    <ChatPanel />
+  </main>
+)
 
 export default Chat
