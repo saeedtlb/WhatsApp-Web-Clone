@@ -6,7 +6,8 @@
 }
 
 header {
-  height: 150px;
+  height: 15%;
+  min-height: 150px;
   background-color: $whatsApp_color;
   display: grid;
   grid-template-columns: 100px 1fr 100px;
