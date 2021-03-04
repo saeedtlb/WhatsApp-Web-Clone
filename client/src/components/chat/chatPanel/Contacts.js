@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 // helper
 import UserIcon from '../../misc/UserIcon'
 // icon
 import addMore from '../../../styles/icons/addMore.png'
 // style
 import '../../../styles/Css/contacts.css'
+import { connect } from 'react-redux'
 
-const Contacts = () => {
+const Contacts = ({ socket }) => {
+  useEffect(() => {
+    if (!socket) return
+
+    socket.on('users', (users) => console.log(users))
+    socket.on('user connected', ({ username }) => alert(username))
+  }, [socket])
+
   return (
     <div className="contacts">
       <div className="filter">
@@ -36,4 +44,8 @@ const Contacts = () => {
   )
 }
 
-export default Contacts
+const mapStateToProps = (state) => ({
+  socket: state.socket
+})
+
+export default connect(mapStateToProps)(Contacts)
