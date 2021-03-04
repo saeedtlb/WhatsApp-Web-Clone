@@ -1,0 +1,62 @@
+@import 'vars';
+
+.message {
+  padding: 10px;
+
+  .texts {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    & > div {
+      max-width: 49%;
+      border-radius: 10px;
+      padding: 10px 15px;
+    }
+
+    .myself {
+      align-self: flex-end;
+      background-color: $whatsApp_color;
+      color: #fff;
+    }
+
+    .other {
+      background-color: #f2f2f2;
+    }
+  }
+
+  .communication {
+    form {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+
+      textarea {
+        flex: 1;
+        resize: none;
+        overflow: hidden;
+        outline: none;
+      }
+
+      button {
+        width: 50px;
+        height: 50px;
+        background-color: $whatsApp_color;
+        border: none;
+        border-radius: 100%;
+        position: relative;
+
+        &::before {
+          content: url('../icons/microphone.png');
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+  }
+}
