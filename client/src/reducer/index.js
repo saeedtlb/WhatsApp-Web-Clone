@@ -1,4 +1,4 @@
-import { NAME } from '../actions/type'
+import { NAME, SOCKET } from '../actions/type'
 
 const reducer = (store, action) => {
   console.log(action)
@@ -8,6 +8,11 @@ const reducer = (store, action) => {
       return {
         ...store,
         name: action.name
+      }
+    case SOCKET:
+      return {
+        ...store,
+        socket: action.socket
       }
     default:
       return store
