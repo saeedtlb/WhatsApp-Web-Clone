@@ -2,7 +2,7 @@ import React from 'react'
 
 // components
 import Header from './Header'
-import ChatPanel from './ChatPanel'
+import ChatPanel from './chatPanel'
 
 const Chat = () => {
   return (
