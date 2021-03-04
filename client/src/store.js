@@ -1,5 +1,5 @@
 const initialStore = {
-  name: '',
+  name: 'saeed',
   users: [{ name: 'ali' }, { name: 'saeed' }],
   error: false
 }
