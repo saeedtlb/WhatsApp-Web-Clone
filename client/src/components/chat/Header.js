@@ -8,7 +8,7 @@ import { ReactComponent as More } from '../../styles/icons/more.svg'
 // style
 import '../../styles/Css/header.css'
 
-const Header = () => {
+const Header = ({ username }) => {
   return (
     <header>
       <div className="wrapper">
@@ -18,7 +18,7 @@ const Header = () => {
             <input type="text" name="search" placeholder="Search messages" autoComplete="off" />
           </div>
           <div className="user">
-            <UserIcon name="saeed" />
+            <UserIcon name={username} />
           </div>
         </div>
         <div className="bottom">
