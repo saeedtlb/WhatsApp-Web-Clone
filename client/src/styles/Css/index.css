@@ -19,4 +19,8 @@ button {
   outline: none;
   cursor: pointer;
 }
+
+main {
+  height: 100%;
+}
 /*# sourceMappingURL=index.css.map */
