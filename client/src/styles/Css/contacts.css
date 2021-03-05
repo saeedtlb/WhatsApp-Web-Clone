@@ -80,6 +80,7 @@
   -webkit-box-flex: 0.95;
       -ms-flex: 0.95;
           flex: 0.95;
+  min-width: 350px;
   overflow-y: scroll;
 }
 

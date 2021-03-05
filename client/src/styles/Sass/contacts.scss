@@ -66,6 +66,7 @@
 
 .contacts__box {
   flex: 0.95;
+  min-width: 350px;
   overflow-y: scroll;
   .userBox {
     justify-content: space-between;
