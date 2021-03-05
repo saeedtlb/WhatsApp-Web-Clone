@@ -48,7 +48,7 @@
           align-items: center;
   font-size: 18px;
   font-weight: bold;
-  overflow: hidden;
+  position: relative;
 }
 
 .userBox__left .icon img {
@@ -56,6 +56,17 @@
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.userBox__left .online::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: green;
+  position: absolute;
+  bottom: 0;
+  right: 2px;
 }
 
 .userBox__right {
