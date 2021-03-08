@@ -1,25 +1,30 @@
-import { useEffect } from 'react'
-import { io } from 'socket.io-client'
+import { useEffect } from "react";
+import { io } from "socket.io-client";
 // redux
-import { useDispatch } from 'react-redux'
-import { setMySocket } from '../actions/index'
+import { useDispatch } from "react-redux";
+import { setMessages, setAllUsers } from "../actions/index";
 
-let socket
+let socket;
 
-const useSocket = (user) => {
-  const dispatch = useDispatch()
+export const useCreateSocket = (user) => {
+  const dispatch = useDispatch();
 
-  const ENDPOINT = 'http://localhost:5000'
+  const ENDPOINT = "http://localhost:8080";
 
   useEffect(() => {
-    if (!user) return
-    socket = io(ENDPOINT, { autoConnect: false })
-    socket.auth = { username: user }
-    socket.connect()
-    dispatch(setMySocket(socket))
-  }, [ENDPOINT])
+    if (!user) return;
+    socket = io(ENDPOINT);
+    socket.emit("join", user);
+    socket.emit("join room", "general", (messages, roomName) =>
+      dispatch(setMessages(messages, roomName))
+    );
 
-  return socket
-}
+    socket.on("new user", (allUsers) => dispatch(setAllUsers(allUsers)));
+  }, [ENDPOINT, user, dispatch]);
+};
 
-export default useSocket
+export const useSocket = () => {
+  const sendMessage = (payload) => socket.emit("send message", payload);
+
+  return [sendMessage];
+};
