@@ -1,43 +1,46 @@
-import { useState } from 'react'
+import { useState } from "react";
 // svg
-import { ReactComponent as Welcome } from '../assets/undraw_welcome_3gvl.svg'
+import { ReactComponent as Welcome } from "../assets/undraw_welcome_3gvl.svg";
 // animate
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 // style
-import '../styles/Css/signIn.css'
+import "../styles/Css/signIn.css";
 // redux
-import { connect, useDispatch } from 'react-redux'
+import { connect, useDispatch } from "react-redux";
 // action
-import { setUserName } from '../actions'
+import { setUserName } from "../actions";
 
-const SignIn = ({ users, history }) => {
-  const [name, setName] = useState('')
-  const [err, setErr] = useState(false)
+const SignIn = ({ allUsers, history }) => {
+  const [name, setName] = useState("");
+  const [err, setErr] = useState(false);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const variants = {
-    show: { y: 0, height: 'auto' },
-    hide: { y: '-100%', height: 0 }
-  }
+    show: { y: 0, height: "auto" },
+    hide: { y: "-100%", height: 0 },
+  };
 
   const submitForm = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const typedName = name.trim().toLowerCase()
+    const typedName = name.trim().toLowerCase();
 
-    const exist = typedName !== '' ? users.find((user) => user.name === typedName) : true
+    const exist =
+      typedName !== ""
+        ? allUsers.find(({ username }) => username === typedName)
+        : true;
 
     if (exist) {
-      setErr(true)
-      return
+      setErr(true);
+      return;
     }
 
-    dispatch(setUserName(typedName))
-    setName('')
+    dispatch(setUserName(typedName));
+    setName("");
 
-    history.push('/chat')
-  }
+    history.push("/chat");
+  };
 
   return (
     <div className="container">
@@ -64,8 +67,10 @@ const SignIn = ({ users, history }) => {
               </section>
 
               <div className="error">
-                <motion.p animate={err ? 'show' : 'hide'} variants={variants}>
-                  {name === '' ? 'Please insert your name' : 'This username has taken before'}
+                <motion.p animate={err ? "show" : "hide"} variants={variants}>
+                  {name === ""
+                    ? "Please insert your name"
+                    : "This username has taken before"}
                 </motion.p>
               </div>
 
@@ -75,11 +80,11 @@ const SignIn = ({ users, history }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => ({
-  users: state.users
-})
+  allUsers: state.allUsers,
+});
 
-export default connect(mapStateToProps)(SignIn)
+export default connect(mapStateToProps)(SignIn);
