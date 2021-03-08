@@ -1,7 +1,15 @@
 const initialStore = {
-  name: 'saeed',
-  users: [{ name: 'ali' }, { name: 'saeed' }],
-  error: false
-}
+  username: "saeed",
+  allUsers: [],
+  connectedRooms: ["general"],
+  messages: {
+    general: [],
+  },
+  currentChat: {
+    isChannel: true,
+    chatName: "general",
+    reciever_id: "",
+  },
+};
 
-export default initialStore
+export default initialStore;
