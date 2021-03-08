@@ -1,32 +1,33 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 // custom hook
-import useSocket from '../../hook/useSocket'
+import { useCreateSocket } from "../../hook/useSocket";
 // components
-import Header from './Header'
-import ChatPanel from './chatPanel'
+import Header from "./Header";
+import ChatPanel from "./chatPanel";
 // store
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
-const Chat = ({ user, history }) => {
+const Chat = ({ user, currentChat, history }) => {
   useEffect(() => {
     if (!user) {
-      history.push('/')
-      return
+      history.push("/");
+      return;
     }
-  }, [user])
+  }, [user, history]);
 
-  useSocket(user)
+  useCreateSocket(user);
 
   return (
-    <main style={{ height: '100%' }}>
-      <Header username={user} />
+    <main style={{ height: "100%" }}>
+      <Header username={user} currentChat={currentChat} />
       <ChatPanel />
     </main>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => ({
-  user: state.name
-})
+  user: state.username,
+  currentChat: state.currentChat,
+});
 
-export default connect(mapStateToProps)(Chat)
+export default connect(mapStateToProps)(Chat);
