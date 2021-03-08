@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 // components
-import Navigation from './Navigation'
-import Contacts from './Contacts'
-import Message from './Message'
+import Navigation from "./Navigation";
+import Contacts from "./Contacts";
+import Message from "./Message";
 // style
-import '../../../styles/Css/chat.css'
+import "../../../styles/Css/chat.css";
 
 const ChatPanel = () => (
   <div className="chat__panel">
@@ -12,6 +12,6 @@ const ChatPanel = () => (
     <Contacts />
     <Message />
   </div>
-)
+);
 
-export default ChatPanel
+export default ChatPanel;
