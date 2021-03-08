@@ -1,11 +1,24 @@
-import { NAME, SOCKET } from './type'
+import { NAME, MESSAGES, SOCKET, ALLUSERS } from "./type";
 
 export const setUserName = (name) => ({
   type: NAME,
-  name
-})
+  name,
+});
 
-export const setMySocket = (socket) => ({
+export const setMessages = (messages, chatName) => ({
+  type: MESSAGES,
+  payload: {
+    messages,
+    chatName,
+  },
+});
+
+export const setSocket = (socket) => ({
   type: SOCKET,
-  socket
-})
+  socket,
+});
+
+export const setAllUsers = (allUsers) => ({
+  type: ALLUSERS,
+  allUsers,
+});
