@@ -1,8 +1,8 @@
 .message {
-  padding: 10px;
+  padding: 10px 0 5px 10px;
 }
 
-.message .texts {
+.message__texts {
   height: 90%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -14,22 +14,23 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  gap: 10px;
 }
 
-.message .texts > div {
+.message__texts > div {
   max-width: 49%;
   border-radius: 10px;
   padding: 10px 15px;
 }
 
-.message .texts .myself {
+.message__texts .myself {
   -ms-flex-item-align: end;
       align-self: flex-end;
   background-color: #1ebe71;
   color: #fff;
 }
 
-.message .texts .other {
+.message__texts .other {
   background-color: #f2f2f2;
 }
 
@@ -54,6 +55,8 @@
   resize: none;
   overflow: hidden;
   outline: none;
+  padding: 5px;
+  font-size: 16px;
 }
 
 .message .communication form button {
