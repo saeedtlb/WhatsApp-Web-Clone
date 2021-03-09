@@ -1,4 +1,4 @@
-@import 'vars';
+@import "vars";
 
 .userBox {
   display: flex;
@@ -13,7 +13,7 @@
     color: #fff;
 
     .text {
-      max-width: 200px;
+      max-width: 150px;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -44,7 +44,7 @@
     }
 
     .online::after {
-      content: '';
+      content: "";
       width: 10px;
       height: 10px;
       border-radius: 100%;
