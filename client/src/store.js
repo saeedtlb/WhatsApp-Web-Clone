@@ -1,5 +1,5 @@
 const initialStore = {
-  username: "saeed",
+  username: "",
   allUsers: [],
   connectedRooms: ["general"],
   messages: {
