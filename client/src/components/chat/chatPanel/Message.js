@@ -6,6 +6,8 @@ import { connect, useDispatch } from "react-redux";
 import { setMessages } from "../../../actions";
 // custom hook
 import { useSocket } from "../../../hook/useSocket";
+// animate
+import { motion } from "framer-motion";
 
 const Message = ({
   currentChat: { isChannel, chatName, reciever_id },
@@ -17,9 +19,7 @@ const Message = ({
   const [sendMessage] = useSocket();
   const dispatch = useDispatch();
 
-  const handleSendMessage = (e) => {
-    e.preventDefault();
-
+  const handleSendMessage = () => {
     const content = message.trim();
 
     // is empty?
@@ -49,10 +49,6 @@ const Message = ({
     setMessage("");
   };
 
-  //   const renderMessages = useMemo(() => console.log(messages, chatName), [
-  //     messages[chatName],
-  //   ]);
-
   const renderMessages = useMemo(
     () =>
       messages[chatName].map((_message, i) => (
@@ -63,22 +59,43 @@ const Message = ({
           {_message.content}
         </div>
       )),
-    [messages[chatName]]
+    [messages[chatName], username, chatName]
   );
 
   return (
     <div className="message">
       <div className="message__texts">{renderMessages}</div>
       <div className="communication">
-        <form onSubmit={handleSendMessage}>
-          <input
-            type="text"
+        <motion.form
+          initial={{ y: 300 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.6, delay: 0.9, ease: "easeIn" }}
+        >
+          <textarea
             name="message"
-            onChange={(e) => setMessage(e.target.value)}
-            value={message}
+            onKeyPress={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSendMessage();
+              } else if (e.shiftKey) {
+                let { rows } = e.target;
+                e.target.rows = rows < 5 ? rows + 1 : rows;
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Backspace") {
+                let { rows, value } = e.target;
+
+                const lines = value.split("\n");
+
+                if (lines[lines.length - 1] === "") {
+                  e.target.rows = rows > 2 ? rows - 1 : rows;
+                }
+              }
+            }}
           />
-          <button type="submit" />
-        </form>
+          <button onClick={() => console.log("record voice")} />
+        </motion.form>
       </div>
     </div>
   );
