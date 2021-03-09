@@ -41,7 +41,6 @@ io.on("connection", (socket) => {
     if (messages[chatName]) {
       messages[chatName].push({ content, sender });
     }
-    console.log(users);
   });
 
   socket.on("disconnect", () => {
