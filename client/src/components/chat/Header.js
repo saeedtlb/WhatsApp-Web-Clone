@@ -1,10 +1,9 @@
 import React from "react";
-
+// helper
 import UserIcon from "../misc/UserIcon";
 // svgs
 import { ReactComponent as Call } from "../../styles/icons/call.svg";
 import { ReactComponent as More } from "../../styles/icons/more.svg";
-
 // style
 import "../../styles/Css/header.css";
 
@@ -13,7 +12,9 @@ const Header = ({ username, currentChat }) => {
     <header>
       <div className="wrapper">
         <div className="top">
-          <div className="logo">WhatsApp</div>
+          <div className="logo">
+            <span>WhatsApp</span>
+          </div>
           <div className="search">
             <input
               type="text"
