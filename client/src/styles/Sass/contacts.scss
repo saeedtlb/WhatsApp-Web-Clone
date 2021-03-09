@@ -1,4 +1,4 @@
-@import 'vars';
+@import "vars";
 
 @mixin box($width, $height, $radius, $background) {
   width: $width;
@@ -36,7 +36,7 @@
       @include box(100%, 100%, 20px, #f2f2f2);
 
       &::before {
-        content: '';
+        content: "";
         @include box(15px, 15px, 100%, #c6c6c6);
         top: 50%;
         left: 10%;
@@ -45,6 +45,7 @@
     }
 
     input {
+      display: none;
       opacity: 0;
 
       &:checked + span {
@@ -66,8 +67,8 @@
 
 .contacts__box {
   flex: 0.95;
-  min-width: 350px;
-  overflow-y: scroll;
+  min-width: 250px;
+  overflow-y: auto;
   .userBox {
     justify-content: space-between;
     transition: background-color 0.6s ease;
@@ -78,8 +79,11 @@
       background-color: rgba(30, 190, 113, 0.2);
     }
 
-    &__left {
+    &__left .text {
       color: black;
+      @media only screen and (max-width: 1200px) {
+        display: none;
+      }
     }
   }
 }
@@ -90,5 +94,34 @@
   h3 {
     margin: 15px;
     color: $whatsApp_color;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  .contacts .filter {
+    padding: 10px;
+
+    h4 {
+      display: none;
+    }
+  }
+  .contacts__box {
+    min-width: initial;
+
+    .userBox {
+      padding: 10px;
+
+      &__right {
+        display: none;
+      }
+    }
+  }
+
+  .contacts .bottom {
+    text-align: initial;
+
+    :not(img) {
+      display: none;
+    }
   }
 }

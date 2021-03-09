@@ -44,7 +44,7 @@
 }
 
 .contacts .filter label span::before {
-  content: '';
+  content: "";
   width: 15px;
   height: 15px;
   position: absolute;
@@ -59,6 +59,7 @@
 }
 
 .contacts .filter label input {
+  display: none;
   opacity: 0;
 }
 
@@ -80,8 +81,8 @@
   -webkit-box-flex: 0.95;
       -ms-flex: 0.95;
           flex: 0.95;
-  min-width: 350px;
-  overflow-y: scroll;
+  min-width: 250px;
+  overflow-y: auto;
 }
 
 .contacts__box .userBox {
@@ -98,8 +99,14 @@
   background-color: rgba(30, 190, 113, 0.2);
 }
 
-.contacts__box .userBox__left {
+.contacts__box .userBox__left .text {
   color: black;
+}
+
+@media only screen and (max-width: 1200px) {
+  .contacts__box .userBox__left .text {
+    display: none;
+  }
 }
 
 .contacts .bottom {
@@ -109,5 +116,29 @@
 .contacts .bottom h3 {
   margin: 15px;
   color: #1ebe71;
+}
+
+@media only screen and (max-width: 1050px) {
+  .contacts .filter {
+    padding: 10px;
+  }
+  .contacts .filter h4 {
+    display: none;
+  }
+  .contacts__box {
+    min-width: initial;
+  }
+  .contacts__box .userBox {
+    padding: 10px;
+  }
+  .contacts__box .userBox__right {
+    display: none;
+  }
+  .contacts .bottom {
+    text-align: initial;
+  }
+  .contacts .bottom :not(img) {
+    display: none;
+  }
 }
 /*# sourceMappingURL=contacts.css.map */
