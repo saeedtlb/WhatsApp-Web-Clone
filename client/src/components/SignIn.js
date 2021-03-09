@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // svg
 import { ReactComponent as Welcome } from "../assets/undraw_welcome_3gvl.svg";
 // animate
@@ -10,7 +10,7 @@ import { connect, useDispatch } from "react-redux";
 // action
 import { setUserName } from "../actions";
 
-const SignIn = ({ allUsers, history }) => {
+const SignIn = ({ allUsers, username, history }) => {
   const [name, setName] = useState("");
   const [err, setErr] = useState(false);
 
@@ -42,8 +42,18 @@ const SignIn = ({ allUsers, history }) => {
     history.push("/chat");
   };
 
+  useEffect(() => {
+    if (username) history.push("/chat");
+  }, [history, username]);
+
   return (
-    <div className="container">
+    <motion.div
+      className="container"
+      initial={{ scaleY: 0 }}
+      animate={{ scaleY: 1 }}
+      exit={{ scaleY: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="sign__in">
         <div className="left">
           <Welcome />
@@ -79,12 +89,13 @@ const SignIn = ({ allUsers, history }) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 const mapStateToProps = (state) => ({
   allUsers: state.allUsers,
+  username: state.username,
 });
 
 export default connect(mapStateToProps)(SignIn);
