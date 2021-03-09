@@ -7,6 +7,8 @@ import ChatPanel from "./chatPanel";
 // store
 import { connect } from "react-redux";
 
+import { motion } from "framer-motion";
+
 const Chat = ({ user, currentChat, history }) => {
   useEffect(() => {
     if (!user) {
@@ -15,13 +17,19 @@ const Chat = ({ user, currentChat, history }) => {
     }
   }, [user, history]);
 
-  useCreateSocket(user);
+  //   useCreateSocket(user);
 
   return (
-    <main style={{ height: "100%" }}>
+    <motion.main
+      style={{ height: "100%" }}
+      initial={{ scaleY: 0 }}
+      animate={{ scaleY: 1 }}
+      exit={{ scaleY: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <Header username={user} currentChat={currentChat} />
       <ChatPanel />
-    </main>
+    </motion.main>
   );
 };
 
