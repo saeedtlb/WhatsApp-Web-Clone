@@ -5,7 +5,10 @@ import UserIcon from "../../misc/UserIcon";
 import addMore from "../../../styles/icons/addMore.png";
 // style
 import "../../../styles/Css/contacts.css";
+// redux
 import { connect } from "react-redux";
+// animate
+import { motion } from "framer-motion";
 
 const Contacts = ({ channels, users, name }) => {
   //   useEffect(() => {
@@ -69,7 +72,12 @@ const Contacts = ({ channels, users, name }) => {
       : null;
 
   return (
-    <div className="contacts">
+    <motion.div
+      className="contacts"
+      initial={{ y: "100%" }}
+      animate={{ y: -70 }}
+      transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+    >
       <div className="filter">
         <label>
           <input type="checkbox" />
@@ -89,7 +97,7 @@ const Contacts = ({ channels, users, name }) => {
         <h3>Addmore friends!</h3>
         <img src={addMore} alt="add more friends" />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
