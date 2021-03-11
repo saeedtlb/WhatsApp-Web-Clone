@@ -85,18 +85,20 @@
   overflow-y: auto;
 }
 
+.contacts__box > div {
+  -webkit-transition: background-color 0.6s ease;
+  transition: background-color 0.6s ease;
+}
+
+.contacts__box > div:hover {
+  background-color: #eceeed;
+}
+
 .contacts__box .userBox {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-transition: background-color 0.6s ease;
-  transition: background-color 0.6s ease;
-  margin: 10px 0;
-  padding: 10px 15px;
-}
-
-.contacts__box .userBox:hover {
-  background-color: rgba(30, 190, 113, 0.2);
+  padding: 15px;
 }
 
 .contacts__box .userBox__left .text {
