@@ -1,4 +1,4 @@
-import { NAME, MESSAGES, SOCKET, ALLUSERS } from "../actions/type";
+import { NAME, MESSAGES, ALLUSERS, TOGGLECHATNAME } from "../actions/type";
 
 const reducer = (store, action) => {
   console.log(action);
@@ -10,17 +10,51 @@ const reducer = (store, action) => {
         username: action.name,
       };
     case MESSAGES:
+      const { isAllMessages, messages, chatName } = action.payload;
+      let newMessages;
+      //   let notification = {
+      //     show: false,
+      //   };
+
+      if (isAllMessages) {
+        newMessages = messages;
+      } else {
+        if (store.messages[chatName]) {
+          newMessages = [...store.messages[chatName], messages];
+        } else {
+          newMessages = [messages];
+        }
+      }
+
+      //   if (chatName !== store.currentChat.chatName) {
+      //     notification = {
+      //       show: true,
+      //       messages,
+      //     };
+      //   }
+
       return {
         ...store,
         messages: {
           ...store.messages,
-          [action.payload.chatName]: action.payload.messages,
+          [chatName]: newMessages,
         },
+        // notification,
       };
-    case SOCKET:
+    case TOGGLECHATNAME:
+      const newState = {
+        currentChat: action.currentChat,
+      };
+
+      if (!store.messages[action.currentChat.chatName]) {
+        newState.messages = {
+          ...store.messages,
+          [action.currentChat.chatName]: [],
+        };
+      }
       return {
         ...store,
-        socket: action.socket,
+        ...newState,
       };
     case ALLUSERS:
       return {
