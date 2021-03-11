@@ -1,24 +1,25 @@
-import { NAME, MESSAGES, SOCKET, ALLUSERS } from "./type";
+import { NAME, MESSAGES, ALLUSERS, TOGGLECHATNAME } from "./type";
 
 export const setUserName = (name) => ({
   type: NAME,
   name,
 });
 
-export const setMessages = (messages, chatName) => ({
+export const setMessages = (messages, chatName, isAllMessages = false) => ({
   type: MESSAGES,
   payload: {
     messages,
     chatName,
+    isAllMessages,
   },
-});
-
-export const setSocket = (socket) => ({
-  type: SOCKET,
-  socket,
 });
 
 export const setAllUsers = (allUsers) => ({
   type: ALLUSERS,
   allUsers,
+});
+
+export const toggleChat = (currentChat) => ({
+  type: TOGGLECHATNAME,
+  currentChat,
 });
