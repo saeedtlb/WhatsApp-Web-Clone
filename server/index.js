@@ -24,25 +24,27 @@ io.on("connection", (socket) => {
     });
     io.emit("new user", users);
   });
-
   socket.on("join room", (roomName, cb) => {
     socket.join(roomName);
     cb(messages[roomName], roomName);
   });
-
-  socket.on("send message", ({ content, to, sender, chatName, isChannel }) => {
-    const payload = {
-      content,
-      sender,
-      chatName: isChannel ? chatName : sender,
-    };
-    socket.to(to).emit("new message", payload);
-
-    if (messages[chatName]) {
-      messages[chatName].push({ content, sender });
+  socket.on(
+    "send message",
+    ({ content, to, sender, chatName, isChannel, time }) => {
+      const payload = {
+        content,
+        sender,
+        time,
+        chatName: isChannel ? chatName : sender,
+      };
+      socket.to(to).emit("new message", payload);
+      if (messages[chatName]) {
+        messages[chatName].push({ content, sender });
+      } else {
+        messages[chatName] = [{ content, sender }];
+      }
     }
-  });
-
+  );
   socket.on("disconnect", () => {
     users = users.filter((user) => user._id !== socket.id);
     io.emit("new user", users);
@@ -50,7 +52,7 @@ io.on("connection", (socket) => {
 });
 
 app.get("/", (req, res) =>
-  res.status(200).write("Back-End for whats app chat messaging")
+  res.status(200).send("Back-End for whats app chat messaging")
 );
 
 server.listen(PORT, () => console.log("Server up and running at " + PORT));
