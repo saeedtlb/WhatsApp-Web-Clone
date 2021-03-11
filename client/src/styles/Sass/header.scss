@@ -10,11 +10,7 @@ header {
   min-height: 150px;
   background-color: $whatsApp_color;
   display: grid;
-  grid-template-columns: 100px 1fr 100px;
-
-  @media only screen and (max-width: 1000px) {
-    grid-template-columns: 100px 1fr 50px;
-  }
+  grid-template-columns: 100px 1fr 50px;
 
   .wrapper {
     grid-column: 2/3;
