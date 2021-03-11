@@ -1,19 +1,39 @@
 @import "vars";
 
 .message {
+  overflow: hidden;
   padding: 10px 0 5px 10px;
 
   &__texts {
-    height: 90%;
+    height: 85%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    margin-bottom: 15px;
+    padding-right: 10px;
 
     & > div {
       max-width: 49%;
       border-radius: 10px;
       padding: 10px 15px;
+
+      h5 {
+        color: $whatsApp_color;
+        margin-bottom: 5px;
+      }
+
+      .chat__content {
+        display: flex;
+        gap: 20px;
+      }
+
+      span {
+        font-size: 13px;
+        align-self: flex-end;
+      }
     }
 
     .myself {
@@ -24,10 +44,16 @@
 
     .other {
       background-color: #f2f2f2;
+
+      span {
+        color: #808080;
+      }
     }
   }
 
   .communication {
+    height: 15%;
+
     form {
       height: 100%;
       display: flex;

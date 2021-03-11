@@ -1,9 +1,10 @@
 .message {
+  overflow: hidden;
   padding: 10px 0 5px 10px;
 }
 
 .message__texts {
-  height: 90%;
+  height: 85%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -15,12 +16,34 @@
       -ms-flex-align: start;
           align-items: flex-start;
   gap: 10px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  margin-bottom: 15px;
+  padding-right: 10px;
 }
 
 .message__texts > div {
   max-width: 49%;
   border-radius: 10px;
   padding: 10px 15px;
+}
+
+.message__texts > div h5 {
+  color: #1ebe71;
+  margin-bottom: 5px;
+}
+
+.message__texts > div .chat__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+}
+
+.message__texts > div span {
+  font-size: 13px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 .message__texts .myself {
@@ -32,6 +55,14 @@
 
 .message__texts .other {
   background-color: #f2f2f2;
+}
+
+.message__texts .other span {
+  color: #808080;
+}
+
+.message .communication {
+  height: 15%;
 }
 
 .message .communication form {
