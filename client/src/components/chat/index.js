@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { motion } from "framer-motion";
 
 const Chat = ({ user, currentChat, history }) => {
+  // const Chat = ({ user, currentChat, notification, history }) => {
   useEffect(() => {
     if (!user) {
       history.push("/");
@@ -17,7 +18,13 @@ const Chat = ({ user, currentChat, history }) => {
     }
   }, [user, history]);
 
-  //   useCreateSocket(user);
+  //   useEffect(() => {
+  //     if (notification.show) {
+  //       alert(notification.messages.sender + " " + notification.messages.content);
+  //     }
+  //   }, [notification.show]);
+
+  useCreateSocket(user);
 
   return (
     <motion.main
@@ -36,6 +43,7 @@ const Chat = ({ user, currentChat, history }) => {
 const mapStateToProps = (state) => ({
   user: state.username,
   currentChat: state.currentChat,
+  //   notification: state.notification,
 });
 
 export default connect(mapStateToProps)(Chat);
