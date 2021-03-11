@@ -16,10 +16,13 @@ export const useCreateSocket = (user) => {
     socket = io(ENDPOINT);
     socket.emit("join", user);
     socket.emit("join room", "general", (messages, roomName) =>
-      dispatch(setMessages(messages, roomName))
+      dispatch(setMessages(messages, roomName, true))
     );
 
     socket.on("new user", (allUsers) => dispatch(setAllUsers(allUsers)));
+    socket.on("new message", ({ chatName, ...res }) =>
+      dispatch(setMessages(res, chatName))
+    );
   }, [ENDPOINT, user, dispatch]);
 };
 
