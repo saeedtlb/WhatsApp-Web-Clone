@@ -6,66 +6,57 @@ import addMore from "../../../styles/icons/addMore.png";
 // style
 import "../../../styles/Css/contacts.css";
 // redux
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { toggleChat } from "../../../actions";
 // animate
 import { motion } from "framer-motion";
 
-const Contacts = ({ channels, users, name }) => {
-  //   useEffect(() => {
-  //     if (socket) {
-  //       socket.on('users', (users) => sortUsers(users))
-  //       socket.on('user connected', (user) => setUsers((prv) => [...prv, user]))
-  //       socket.on('disconnect', (user) => console.log(user))
-  //     }
-  //   }, [socket])
+const Contacts = ({ channels, users, username, currentChat, messages }) => {
+  const dispatch = useDispatch();
 
-  const renderRooms = (rooms) =>
-    rooms
-      ? rooms.map((room, i) => {
-          const currentChat = {
-            chatName: room,
-            isChannel: true,
-            reciever_id: "",
-          };
+  const renderChatSections = (chats, type) =>
+    chats
+      ? chats.map((chat) => {
+          if (type === "user" && chat.username === username) return;
 
-          return (
-            <div
-              key={room || i}
-              onClick={() =>
-                console.log("toggle chat(current chat)" + currentChat)
-              }
-            >
-              <UserIcon name={room} type="message" />
-            </div>
-          );
-        })
-      : null;
+          const changedChat =
+            type === "user"
+              ? {
+                  chatName: chat.username,
+                  isChannel: false,
+                  reciever_id: chat._id,
+                }
+              : {
+                  chatName: chat,
+                  isChannel: true,
+                  reciever_id: "",
+                };
 
-  const renderUsers = (users) =>
-    users
-      ? users.map((user) => {
-          if (user.username === name) {
-            return (
-              <div key={user._id} style={{ backgroundColor: "red" }}>
-                <UserIcon name={user.username} type="message" />
-              </div>
-            );
-          }
+          let style;
 
-          const currentChat = {
-            chatName: user.username,
-            isChannel: false,
-            reciever_id: user._id,
-          };
+          if (
+            (type === "user" && chat._id === currentChat.reciever_id) ||
+            (type === "room" && chat === currentChat.chatName)
+          )
+            style = "rgba(30, 190, 113, 0.2)";
+
+          const name = type === "room" ? chat : chat.username;
+
+          const chats = messages[name];
+          const text = chats ? chats[chats.length - 1] : "";
 
           return (
             <div
-              key={user._id}
-              onClick={() =>
-                console.log("toggle chat(currentChat)" + currentChat)
-              }
+              key={type === "user" ? chat._id : chat}
+              onClick={() => dispatch(toggleChat(changedChat))}
+              style={style ? { backgroundColor: style } : null}
             >
-              <UserIcon name={user.username} type="message" />
+              <UserIcon
+                name={type === "user" ? chat.username : chat}
+                type="message"
+                isChannel={type === "room"}
+                text={text}
+              />
             </div>
           );
         })
@@ -74,8 +65,8 @@ const Contacts = ({ channels, users, name }) => {
   return (
     <motion.div
       className="contacts"
-      initial={{ y: "100%" }}
-      animate={{ y: -70 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
     >
       <div className="filter">
@@ -87,9 +78,9 @@ const Contacts = ({ channels, users, name }) => {
       </div>
 
       <div className="contacts__box">
-        {renderRooms(channels)}
+        {renderChatSections(channels, "room")}
         <hr />
-        {renderUsers(users)}
+        {renderChatSections(users, "user")}
       </div>
 
       <div className="bottom">
@@ -104,7 +95,9 @@ const Contacts = ({ channels, users, name }) => {
 const mapStateToProps = (state) => ({
   channels: state.connectedRooms,
   users: state.allUsers,
-  name: state.username,
+  username: state.username,
+  currentChat: state.currentChat,
+  messages: state.messages,
 });
 
 export default connect(mapStateToProps)(Contacts);
