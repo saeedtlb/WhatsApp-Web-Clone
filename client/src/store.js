@@ -1,5 +1,6 @@
 const initialStore = {
   username: "",
+  //   notification: false,
   allUsers: [],
   connectedRooms: ["general"],
   messages: {
