@@ -7,44 +7,42 @@ import { ReactComponent as More } from "../../styles/icons/more.svg";
 // style
 import "../../styles/Css/header.css";
 
-const Header = ({ username, currentChat }) => {
-  return (
-    <header>
-      <div className="wrapper">
-        <div className="top">
-          <div className="logo">
-            <span>WhatsApp</span>
-          </div>
-          <div className="search">
-            <input
-              type="text"
-              name="search"
-              placeholder="Search messages"
-              autoComplete="off"
-            />
-          </div>
-          <div className="user">
-            <UserIcon name={username} />
-          </div>
+const Header = ({ username, currentChat }) => (
+  <header>
+    <div className="wrapper">
+      <div className="top">
+        <div className="logo">
+          <span>WhatsApp</span>
         </div>
-        <div className="bottom">
-          <div className="chat_user">
-            {currentChat ? (
-              <UserIcon name={currentChat.chatName} status="online" />
-            ) : null}
+        <div className="search">
+          <input
+            type="text"
+            name="search"
+            placeholder="Search messages"
+            autoComplete="off"
+          />
+        </div>
+        <div className="user">
+          <UserIcon name={username} />
+        </div>
+      </div>
+      <div className="bottom">
+        <div className="chat_user">
+          {currentChat ? (
+            <UserIcon name={currentChat.chatName} status="online" />
+          ) : null}
+        </div>
+        <div className="icons">
+          <div className="call">
+            <Call />
           </div>
-          <div className="icons">
-            <div className="call">
-              <Call />
-            </div>
-            <div className="more">
-              <More />
-            </div>
+          <div className="more">
+            <More />
           </div>
         </div>
       </div>
-    </header>
-  );
-};
+    </div>
+  </header>
+);
 
 export default Header;
