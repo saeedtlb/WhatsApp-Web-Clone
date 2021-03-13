@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { io } from "socket.io-client";
 // redux
 import { useDispatch } from "react-redux";
-import { setMessages, setAllUsers } from "../actions/index";
+import { setMessages, setAllUsers, setNotification } from "../actions/index";
 
 let socket;
 
@@ -20,9 +20,11 @@ export const useCreateSocket = (user) => {
     );
 
     socket.on("new user", (allUsers) => dispatch(setAllUsers(allUsers)));
-    socket.on("new message", ({ chatName, ...res }) =>
-      dispatch(setMessages(res, chatName))
-    );
+    socket.on("new message", ({ chatName, ...res }) => {
+      dispatch(setMessages(res, chatName));
+      // this will send notification if pass conditions
+      dispatch(setNotification(chatName, res));
+    });
   }, [ENDPOINT, user, dispatch]);
 };
 
