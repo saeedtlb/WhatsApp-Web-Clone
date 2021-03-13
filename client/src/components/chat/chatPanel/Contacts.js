@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 // helper
 import UserIcon from "../../misc/UserIcon";
 // icon
@@ -11,8 +11,32 @@ import { toggleChat } from "../../../actions";
 // animate
 import { motion } from "framer-motion";
 
-const Contacts = ({ channels, users, username, currentChat, messages }) => {
+const Contacts = ({
+  state: {
+    connectedRooms,
+    allUsers,
+    username,
+    currentChat,
+    messages,
+    notification,
+  },
+}) => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (notification.show) {
+      const { sender, content } = notification.messages;
+      //   alert(sender + " " + content);
+      const notif = new Notification("New whats App message", {
+        body: `${sender}: ${content}`,
+        icon: "/whatsApp.ico",
+      });
+
+      setTimeout(() => {
+        notif.close();
+      }, 5 * 1000);
+    }
+  }, [notification]);
 
   const renderChatSections = (chats, type) =>
     chats
@@ -78,9 +102,9 @@ const Contacts = ({ channels, users, username, currentChat, messages }) => {
       </div>
 
       <div className="contacts__box">
-        {renderChatSections(channels, "room")}
+        {renderChatSections(connectedRooms, "room")}
         <hr />
-        {renderChatSections(users, "user")}
+        {renderChatSections(allUsers, "user")}
       </div>
 
       <div className="bottom">
@@ -92,12 +116,6 @@ const Contacts = ({ channels, users, username, currentChat, messages }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  channels: state.connectedRooms,
-  users: state.allUsers,
-  username: state.username,
-  currentChat: state.currentChat,
-  messages: state.messages,
-});
+const mapStateToProps = (state) => ({ state });
 
 export default connect(mapStateToProps)(Contacts);
