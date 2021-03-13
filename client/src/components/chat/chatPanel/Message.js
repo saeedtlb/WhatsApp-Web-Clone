@@ -71,7 +71,8 @@ const Message = ({
           </div>
         </div>
       )),
-    [messages[chatName], username, chatName]
+    // [messages[chatName], username, chatName]
+    [username, chatName, isChannel, messages]
   );
 
   const handleBackSpace = (e) => {
