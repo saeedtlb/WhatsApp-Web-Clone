@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 // custom hook
 import { useCreateSocket } from "../../hook/useSocket";
 // components
 import Header from "./Header";
 import ChatPanel from "./chatPanel";
 // store
-import { connect } from "react-redux";
-
+import { connect, useDispatch } from "react-redux";
+import { setNotificationPermission } from "../../actions/index";
+// animate
 import { motion } from "framer-motion";
 
 const Chat = ({ user, currentChat, history }) => {
-  // const Chat = ({ user, currentChat, notification, history }) => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (!user) {
       history.push("/");
@@ -18,11 +20,16 @@ const Chat = ({ user, currentChat, history }) => {
     }
   }, [user, history]);
 
-  //   useEffect(() => {
-  //     if (notification.show) {
-  //       alert(notification.messages.sender + " " + notification.messages.content);
-  //     }
-  //   }, [notification.show]);
+  useEffect(() => {
+    (async () => {
+      if (Notification.permission === "granted") {
+        dispatch(setNotificationPermission("granted"));
+      } else if (Notification.permission !== "denied") {
+        const permission = await Notification.requestPermission();
+        dispatch(setNotificationPermission(permission));
+      }
+    })();
+  }, [dispatch]);
 
   useCreateSocket(user);
 
@@ -43,7 +50,6 @@ const Chat = ({ user, currentChat, history }) => {
 const mapStateToProps = (state) => ({
   user: state.username,
   currentChat: state.currentChat,
-  //   notification: state.notification,
 });
 
 export default connect(mapStateToProps)(Chat);
