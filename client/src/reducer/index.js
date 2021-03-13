@@ -1,4 +1,11 @@
-import { NAME, MESSAGES, ALLUSERS, TOGGLECHATNAME } from "../actions/type";
+import {
+  NAME,
+  MESSAGES,
+  ALLUSERS,
+  TOGGLECHATNAME,
+  NOTIFICATIONPERMISSION,
+  NOTIFICATION,
+} from "../actions/type";
 
 const reducer = (store, action) => {
   console.log(action);
@@ -12,9 +19,6 @@ const reducer = (store, action) => {
     case MESSAGES:
       const { isAllMessages, messages, chatName } = action.payload;
       let newMessages;
-      //   let notification = {
-      //     show: false,
-      //   };
 
       if (isAllMessages) {
         newMessages = messages;
@@ -25,22 +29,14 @@ const reducer = (store, action) => {
           newMessages = [messages];
         }
       }
-
-      //   if (chatName !== store.currentChat.chatName) {
-      //     notification = {
-      //       show: true,
-      //       messages,
-      //     };
-      //   }
-
       return {
         ...store,
         messages: {
           ...store.messages,
           [chatName]: newMessages,
         },
-        // notification,
       };
+
     case TOGGLECHATNAME:
       const newState = {
         currentChat: action.currentChat,
@@ -52,14 +48,45 @@ const reducer = (store, action) => {
           [action.currentChat.chatName]: [],
         };
       }
+      //   dont show notiffication if user is on the same chat
+      if (store.notification.messages.chatName === store.currentChat.chatName)
+        newState.notification = {
+          ...store.notification,
+          show: false,
+        };
+
       return {
         ...store,
         ...newState,
+      };
+    case NOTIFICATION:
+      // check that should we send notification
+      let notification = {
+        ...store.notification,
+      };
+      if (
+        store.notification.permission &&
+        store.currentChat.chatName !== action.payload.chatName
+      ) {
+        notification.show = true;
+        notification.messages = action.payload;
+      }
+      return {
+        ...store,
+        notification,
       };
     case ALLUSERS:
       return {
         ...store,
         allUsers: action.allUsers,
+      };
+    case NOTIFICATIONPERMISSION:
+      return {
+        ...store,
+        notification: {
+          ...store.notification,
+          permission: action.permission,
+        },
       };
     default:
       return store;
