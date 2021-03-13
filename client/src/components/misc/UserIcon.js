@@ -1,7 +1,12 @@
+import { useMemo } from "react";
+// style
 import "../../styles/Css/userIcon.css";
 
 const UserIcon = ({ name, url, status, text, type, isChannel }) => {
-  const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
+  const randomColorGenerator = useMemo(
+    () => Math.floor(Math.random() * 16777215).toString(16),
+    []
+  );
 
   return (
     <div className="userBox">
@@ -11,7 +16,7 @@ const UserIcon = ({ name, url, status, text, type, isChannel }) => {
           className={`icon ${
             type === "message" && !isChannel ? "online" : null
           }`}
-          style={{ backgroundColor: "#" + randomColor() }}
+          style={{ backgroundColor: "#" + randomColorGenerator }}
         >
           {url ? <img src={url} alt="user icon" /> : name.slice(0, 2)}
         </div>
