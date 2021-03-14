@@ -26,7 +26,6 @@ const Contacts = ({
   useEffect(() => {
     if (notification.show) {
       const { sender, content } = notification.messages;
-      //   alert(sender + " " + content);
       const notif = new Notification("New whats App message", {
         body: `${sender}: ${content}`,
         icon: "/whatsApp.ico",
