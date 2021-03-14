@@ -1,11 +1,18 @@
 import {
+  SOCKETID,
   NAME,
   MESSAGES,
   ALLUSERS,
   TOGGLECHATNAME,
   NOTIFICATIONPERMISSION,
   NOTIFICATION,
+  TYPING,
 } from "./type";
+
+export const setSocketId = (id) => ({
+  type: SOCKETID,
+  id,
+});
 
 export const setUserName = (name) => ({
   type: NAME,
@@ -43,4 +50,12 @@ export const setNotification = (chatName, { sender, content }) => ({
 export const setNotificationPermission = (permission) => ({
   type: NOTIFICATIONPERMISSION,
   permission: permission === "granted" ? true : false,
+});
+
+export const setTyping = (isTypingUsers, status) => ({
+  type: TYPING,
+  payload: {
+    isTyping: status,
+    users: isTypingUsers,
+  },
 });
