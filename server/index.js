@@ -51,17 +51,11 @@ io.on("connection", (socket) => {
 
   socket.on("is typing", ({ username, to, typing }) => {
     if (typing) {
-      if (isTypingUsers[to]) {
-        isTypingUsers[to].push(username);
-      } else {
-        isTypingUsers[to] = [username];
-      }
-    } else {
-      //   const index = isTypingUsers[to].indexOf(username);
-      //   index > -1 && isTypingUsers[to].splice(index, 1);
-
+      if (isTypingUsers[to]) isTypingUsers[to].push(username);
+      else isTypingUsers[to] = [username];
+    } else
       isTypingUsers[to] = isTypingUsers[to].filter((user) => user !== username);
-    }
+
     socket.to(to).emit("typing", isTypingUsers, typing);
   });
 
