@@ -1,11 +1,18 @@
 const initialStore = {
   username: "",
+  socket_id: "",
+  allUsers: [],
+  connectedRooms: ["general"],
+  typing: {
+    isTyping: false,
+    users: {
+      general: [],
+    },
+  },
   notification: {
     show: false,
     permission: false,
   },
-  allUsers: [],
-  connectedRooms: ["general"],
   messages: {
     general: [],
   },
