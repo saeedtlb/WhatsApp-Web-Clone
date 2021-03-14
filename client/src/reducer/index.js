@@ -1,16 +1,23 @@
 import {
+  SOCKETID,
   NAME,
   MESSAGES,
   ALLUSERS,
   TOGGLECHATNAME,
   NOTIFICATIONPERMISSION,
   NOTIFICATION,
+  TYPING,
 } from "../actions/type";
 
 const reducer = (store, action) => {
   console.log(action);
 
   switch (action.type) {
+    case SOCKETID:
+      return {
+        ...store,
+        socket_id: action.id,
+      };
     case NAME:
       return {
         ...store,
@@ -36,7 +43,6 @@ const reducer = (store, action) => {
           [chatName]: newMessages,
         },
       };
-
     case TOGGLECHATNAME:
       const newState = {
         currentChat: action.currentChat,
@@ -49,7 +55,10 @@ const reducer = (store, action) => {
         };
       }
       //   dont show notiffication if user is on the same chat
-      if (store.notification.messages.chatName === store.currentChat.chatName)
+      if (
+        store.notification.messages &&
+        store.notification.messages.chatName === store.currentChat.chatName
+      )
         newState.notification = {
           ...store.notification,
           show: false,
@@ -87,6 +96,11 @@ const reducer = (store, action) => {
           ...store.notification,
           permission: action.permission,
         },
+      };
+    case TYPING:
+      return {
+        ...store,
+        typing: action.payload,
       };
     default:
       return store;
