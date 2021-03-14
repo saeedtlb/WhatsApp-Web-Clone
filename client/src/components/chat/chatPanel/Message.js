@@ -13,9 +13,11 @@ const Message = ({
   currentChat: { isChannel, chatName, reciever_id },
   username,
   messages,
+  typing,
+  _id,
 }) => {
   const [message, setMessage] = useState("");
-  const [sendMessage] = useSocket();
+  const [sendMessage, isTyping] = useSocket();
   const dispatch = useDispatch();
   const scrollRef = useRef();
   const dateOptions = ["en-US", { hour: "2-digit", minute: "2-digit" }];
@@ -99,10 +101,42 @@ const Message = ({
     }
   };
 
+  const typingStatus = (status) => {
+    const payload = {
+      username,
+      typing: status,
+      to: isChannel ? chatName : reciever_id,
+    };
+
+    isTyping(payload);
+  };
+
+  const typingUsers = useMemo(() => {
+    console.log("come");
+    const to = isChannel ? chatName : _id;
+    const show = typing.isTyping && typing.users[to] && typing.users[to].length;
+
+    return show ? (
+      <motion.div
+        className="typing"
+        initial={{ x: "-100%" }}
+        animate={show ? { x: 0 } : { x: "-100%" }}
+      >
+        {typing.users[to].slice(0, 2).join(", ")} is typing
+        <div className="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </motion.div>
+    ) : null;
+  }, [typing, _id, chatName, isChannel]);
+
   return (
     <div className="message">
       <div className="message__texts" ref={scrollRef}>
         {messages[chatName] ? renderMessages : null}
+        {typingUsers}
       </div>
       <div className="communication">
         <motion.form
@@ -116,6 +150,8 @@ const Message = ({
             onChange={(e) => setMessage(e.target.value)}
             onKeyPress={handleKeyPress}
             onKeyDown={handleBackSpace}
+            onFocus={() => typingStatus(true)}
+            onBlur={() => typingStatus(false)}
           />
           <button onClick={() => console.log("record voice")} />
         </motion.form>
@@ -129,6 +165,8 @@ const mapStateToProps = (state) => ({
   currentChat: state.currentChat,
   username: state.username,
   messages: state.messages,
+  typing: state.typing,
+  _id: state.socket_id,
 });
 
 export default connect(mapStateToProps)(Message);
