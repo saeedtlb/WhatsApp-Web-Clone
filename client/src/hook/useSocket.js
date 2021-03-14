@@ -2,7 +2,13 @@ import { useEffect } from "react";
 import { io } from "socket.io-client";
 // redux
 import { useDispatch } from "react-redux";
-import { setMessages, setAllUsers, setNotification } from "../actions/index";
+import {
+  setSocketId,
+  setMessages,
+  setAllUsers,
+  setNotification,
+  setTyping,
+} from "../actions/index";
 
 let socket;
 
@@ -14,6 +20,9 @@ export const useCreateSocket = (user) => {
   useEffect(() => {
     if (!user) return;
     socket = io(ENDPOINT);
+
+    socket.on("connect", () => dispatch(setSocketId(socket.id)));
+
     socket.emit("join", user);
     socket.emit("join room", "general", (messages, roomName) =>
       dispatch(setMessages(messages, roomName, true))
@@ -25,11 +34,16 @@ export const useCreateSocket = (user) => {
       // this will send notification if pass conditions
       dispatch(setNotification(chatName, res));
     });
+    socket.on("typing", (isTypingUsers, status) =>
+      dispatch(setTyping(isTypingUsers, status))
+    );
   }, [ENDPOINT, user, dispatch]);
 };
 
 export const useSocket = () => {
   const sendMessage = (payload) => socket.emit("send message", payload);
 
-  return [sendMessage];
+  const isTyping = (payload) => socket.emit("is typing", payload);
+
+  return [sendMessage, isTyping];
 };
