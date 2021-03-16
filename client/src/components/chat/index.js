@@ -1,6 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // custom hook
 import { useCreateSocket } from "../../hook/useSocket";
+// helper
+import CreateChannel from "../misc/CreateChannel";
 // components
 import Header from "./Header";
 import ChatPanel from "./chatPanel";
@@ -11,6 +13,7 @@ import { setNotificationPermission } from "../../actions/index";
 import { motion } from "framer-motion";
 
 const Chat = ({ user, currentChat, history }) => {
+  const [channelForm, setChannelForm] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,7 +34,7 @@ const Chat = ({ user, currentChat, history }) => {
     })();
   }, [dispatch]);
 
-  useCreateSocket(user);
+  //   useCreateSocket(user);
 
   return (
     <motion.main
@@ -42,7 +45,11 @@ const Chat = ({ user, currentChat, history }) => {
       transition={{ duration: 0.5 }}
     >
       <Header username={user} currentChat={currentChat} />
-      <ChatPanel />
+      <ChatPanel setChannelForm={setChannelForm} />
+      <CreateChannel
+        channelForm={channelForm}
+        setChannelForm={setChannelForm}
+      />
     </motion.main>
   );
 };
