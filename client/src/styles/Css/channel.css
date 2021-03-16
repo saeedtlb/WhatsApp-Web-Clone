@@ -1,0 +1,105 @@
+.channel__form {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background-color: #151b23;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 100;
+}
+
+.channel__form form {
+  width: 30%;
+  height: 35%;
+  padding: 20px;
+  background-color: #f8fafd;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.channel__form form section {
+  -webkit-box-flex: 0.2;
+      -ms-flex: 0.2;
+          flex: 0.2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  text-transform: capitalize;
+}
+
+.channel__form form section svg {
+  width: 20px;
+  height: 20px;
+  -webkit-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+  cursor: pointer;
+}
+
+.channel__form form section span:hover svg {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  fill: tomato;
+}
+
+.channel__form form > div {
+  -webkit-box-flex: 0.65;
+      -ms-flex: 0.65;
+          flex: 0.65;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.channel__form form > div label {
+  width: 60%;
+  text-transform: capitalize;
+}
+
+.channel__form form input {
+  display: block;
+  width: 60%;
+  height: 35px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+}
+
+.channel__form form input[type="text"] {
+  border: 1px solid #e8ecf1;
+  padding: 10px;
+}
+
+.channel__form form input[type="submit"] {
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: capitalize;
+  color: #ebebed;
+  background-color: #283341;
+}
+/*# sourceMappingURL=channel.css.map */
