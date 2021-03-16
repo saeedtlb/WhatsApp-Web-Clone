@@ -73,7 +73,6 @@ const Message = ({
           </div>
         </div>
       )),
-    // [messages[chatName], username, chatName]
     [username, chatName, isChannel, messages]
   );
 
