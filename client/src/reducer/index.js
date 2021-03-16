@@ -7,6 +7,7 @@ import {
   NOTIFICATIONPERMISSION,
   NOTIFICATION,
   TYPING,
+  ROOM,
 } from "../actions/type";
 
 const reducer = (store, action) => {
@@ -101,6 +102,11 @@ const reducer = (store, action) => {
       return {
         ...store,
         typing: action.payload,
+      };
+    case ROOM:
+      return {
+        ...store,
+        connectedRooms: [...store.connectedRooms, action.room],
       };
     default:
       return store;
