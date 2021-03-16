@@ -1,4 +1,4 @@
-@import 'vars';
+@import "vars";
 
 .container {
   width: 100%;
@@ -67,12 +67,6 @@
     &:active {
       box-shadow: 0 2px #000;
     }
-  }
-
-  .error {
-    overflow: hidden;
-    color: red;
-    margin-bottom: 10px;
   }
 }
 
