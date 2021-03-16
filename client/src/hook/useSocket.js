@@ -14,6 +14,7 @@ let socket;
 
 export const useCreateSocket = (user) => {
   const dispatch = useDispatch();
+  const [joinRoom] = useSocket();
 
   const ENDPOINT = "http://localhost:8080";
 
@@ -24,9 +25,10 @@ export const useCreateSocket = (user) => {
     socket.on("connect", () => dispatch(setSocketId(socket.id)));
 
     socket.emit("join", user);
-    socket.emit("join room", "general", (messages, roomName) =>
-      dispatch(setMessages(messages, roomName, true))
-    );
+    joinRoom("general", true);
+    // socket.emit("join room", "general", (messages, roomName) =>
+    //   dispatch(setMessages(messages, roomName, true))
+    // );
 
     socket.on("new user", (allUsers) => dispatch(setAllUsers(allUsers)));
     socket.on("new message", ({ chatName, ...res }) => {
@@ -41,9 +43,16 @@ export const useCreateSocket = (user) => {
 };
 
 export const useSocket = () => {
+  const dispatch = useDispatch();
+
   const sendMessage = (payload) => socket.emit("send message", payload);
 
   const isTyping = (payload) => socket.emit("is typing", payload);
 
-  return [sendMessage, isTyping];
+  const joinRoom = (channelName, allMessage) =>
+    socket.emit("join room", channelName, (messages, roomName) =>
+      dispatch(setMessages(messages, roomName, allMessage))
+    );
+
+  return [sendMessage, isTyping, joinRoom];
 };
