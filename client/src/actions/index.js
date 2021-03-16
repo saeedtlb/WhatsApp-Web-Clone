@@ -7,6 +7,7 @@ import {
   NOTIFICATIONPERMISSION,
   NOTIFICATION,
   TYPING,
+  ROOM,
 } from "./type";
 
 export const setSocketId = (id) => ({
@@ -58,4 +59,9 @@ export const setTyping = (isTypingUsers, status) => ({
     isTyping: status,
     users: isTypingUsers,
   },
+});
+
+export const setConnectedRooms = (room) => ({
+  type: ROOM,
+  room,
 });
