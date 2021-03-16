@@ -6,10 +6,10 @@ import Message from "./Message";
 // style
 import "../../../styles/Css/chat.css";
 
-const ChatPanel = () => (
+const ChatPanel = ({ setChannelForm }) => (
   <div className="chat__panel">
     <Navigation />
-    <Contacts />
+    <Contacts setChannelForm={setChannelForm} />
     <Message />
   </div>
 );
