@@ -12,6 +12,7 @@ import { toggleChat } from "../../../actions";
 import { motion } from "framer-motion";
 
 const Contacts = ({
+  setChannelForm,
   state: {
     connectedRooms,
     allUsers,
@@ -109,7 +110,11 @@ const Contacts = ({
       <div className="bottom">
         <h2>You've reached the end.</h2>
         <h3>Addmore friends!</h3>
-        <img src={addMore} alt="add more friends" />
+        <img
+          src={addMore}
+          alt="add more friends"
+          onClick={() => setChannelForm(true)}
+        />
       </div>
     </motion.div>
   );
