@@ -8,6 +8,7 @@ import {
   NOTIFICATION,
   TYPING,
   ROOM,
+  NEWCHANNEL,
 } from "./type";
 
 export const setSocketId = (id) => ({
@@ -61,7 +62,12 @@ export const setTyping = (isTypingUsers, status) => ({
   },
 });
 
-export const setConnectedRooms = (room) => ({
+export const newChannels = (rooms) => ({
   type: ROOM,
+  rooms,
+});
+
+export const createNewChannel = (room) => ({
+  type: NEWCHANNEL,
   room,
 });

@@ -7,3 +7,4 @@ export const NOTIFICATION = "NOTIFICATION";
 export const NOTIFICATIONPERMISSION = "NOTIFICATIONPERMISSION";
 export const TYPING = "TYPING";
 export const ROOM = "ROOM";
+export const NEWCHANNEL = "NEWCHANNEL";
