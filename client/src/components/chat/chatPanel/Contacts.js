@@ -15,6 +15,7 @@ const Contacts = ({
   setChannelForm,
   state: {
     connectedRooms,
+    channels,
     allUsers,
     username,
     currentChat,
@@ -57,10 +58,11 @@ const Contacts = ({
                 };
 
           let style;
+          const isRoom = /^(room|newRoom)$/g.test(type);
 
           if (
             (type === "user" && chat._id === currentChat.reciever_id) ||
-            (type === "room" && chat === currentChat.chatName)
+            (isRoom && chat === currentChat.chatName)
           )
             style = "rgba(30, 190, 113, 0.2)";
 
@@ -78,8 +80,9 @@ const Contacts = ({
               <UserIcon
                 name={type === "user" ? chat.username : chat}
                 type="message"
-                isChannel={type === "room"}
+                isChannel={isRoom}
                 text={text}
+                status={type === "newRoom" ? "You are not joined yet" : ""}
               />
             </div>
           );
@@ -102,6 +105,8 @@ const Contacts = ({
       </div>
 
       <div className="contacts__box">
+        {renderChatSections(channels, "newRoom")}
+        <hr />
         {renderChatSections(connectedRooms, "room")}
         <hr />
         {renderChatSections(allUsers, "user")}
@@ -109,10 +114,10 @@ const Contacts = ({
 
       <div className="bottom">
         <h2>You've reached the end.</h2>
-        <h3>Addmore friends!</h3>
+        <h3>Create new group!</h3>
         <img
           src={addMore}
-          alt="add more friends"
+          alt="create group"
           onClick={() => setChannelForm(true)}
         />
       </div>
