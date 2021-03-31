@@ -98,6 +98,10 @@
     margin: 15px;
     color: $whatsApp_color;
   }
+
+  img {
+    cursor: pointer;
+  }
 }
 
 @media only screen and (max-width: 1050px) {
