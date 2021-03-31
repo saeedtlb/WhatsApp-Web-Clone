@@ -8,6 +8,7 @@ import {
   NOTIFICATION,
   TYPING,
   ROOM,
+  NEWCHANNEL,
 } from "../actions/type";
 
 const reducer = (store, action) => {
@@ -104,9 +105,21 @@ const reducer = (store, action) => {
         typing: action.payload,
       };
     case ROOM:
+      const notConnectedRooms = action.rooms.filter(
+        (room) => !store.connectedRooms.includes(room)
+      );
+      return {
+        ...store,
+        channels: notConnectedRooms,
+      };
+    case NEWCHANNEL:
+      const channels = store.channels.filter(
+        (channel) => channel !== action.room
+      );
       return {
         ...store,
         connectedRooms: [...store.connectedRooms, action.room],
+        channels,
       };
     default:
       return store;
