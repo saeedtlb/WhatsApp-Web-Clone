@@ -8,13 +8,14 @@ import {
   setAllUsers,
   setNotification,
   setTyping,
+  newChannels,
 } from "../actions/index";
 
 let socket;
 
 export const useCreateSocket = (user) => {
   const dispatch = useDispatch();
-  const [joinRoom] = useSocket();
+  const [, , joinRoom] = useSocket();
 
   const ENDPOINT = "http://localhost:8080";
 
@@ -26,10 +27,8 @@ export const useCreateSocket = (user) => {
 
     socket.emit("join", user);
     joinRoom("general", true);
-    // socket.emit("join room", "general", (messages, roomName) =>
-    //   dispatch(setMessages(messages, roomName, true))
-    // );
 
+    socket.on("channels", (channels) => dispatch(newChannels(channels)));
     socket.on("new user", (allUsers) => dispatch(setAllUsers(allUsers)));
     socket.on("new message", ({ chatName, ...res }) => {
       dispatch(setMessages(res, chatName));
@@ -54,5 +53,10 @@ export const useSocket = () => {
       dispatch(setMessages(messages, roomName, allMessage))
     );
 
-  return [sendMessage, isTyping, joinRoom];
+  const createRoom = (room) => {
+    socket.emit("create room", room);
+    joinRoom(room, true);
+  };
+
+  return [sendMessage, isTyping, joinRoom, createRoom];
 };
