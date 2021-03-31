@@ -6,6 +6,7 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 .userBox__left {
