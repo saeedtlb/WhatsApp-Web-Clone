@@ -6,12 +6,17 @@ import "../../styles/Css/channel.css";
 // animate
 import { motion, AnimatePresence } from "framer-motion";
 // redux
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { createNewChannel } from "../../actions";
+// custom hook
+import { useSocket } from "../../hook/useSocket";
 
 const CreateChannel = ({ channelForm, setChannelForm, rooms }) => {
   const [channelName, setChannelName] = useState("");
   const [err, setErr] = useState([false, ""]);
+  const [, , , createRoom] = useSocket();
   const ref = useRef();
+  const dispatch = useDispatch();
 
   const newChannel = (e) => {
     e.preventDefault();
@@ -29,7 +34,9 @@ const CreateChannel = ({ channelForm, setChannelForm, rooms }) => {
       return;
     }
 
-    console.log("create new channel ", name);
+    createRoom(name);
+    dispatch(createNewChannel(name));
+    setChannelForm(false);
   };
 
   return (
@@ -55,6 +62,7 @@ const CreateChannel = ({ channelForm, setChannelForm, rooms }) => {
             <div>
               <label>channel name:</label>
               <input
+                autoFocus={true}
                 type="text"
                 placeholder="javaScript"
                 value={channelName}
