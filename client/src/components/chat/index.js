@@ -34,7 +34,7 @@ const Chat = ({ user, currentChat, history }) => {
     })();
   }, [dispatch]);
 
-  //   useCreateSocket(user);
+  useCreateSocket(user);
 
   return (
     <motion.main
