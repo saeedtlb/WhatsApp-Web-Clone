@@ -1,9 +1,9 @@
-import React, { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 // style
 import "../../../styles/Css/message.css";
 // redux Store
 import { connect, useDispatch } from "react-redux";
-import { setMessages } from "../../../actions";
+import { setMessages, createNewChannel } from "../../../actions";
 // custom hook
 import { useSocket } from "../../../hook/useSocket";
 // animate
@@ -14,16 +14,18 @@ const Message = ({
   username,
   messages,
   typing,
+  channels,
   _id,
 }) => {
   const [message, setMessage] = useState("");
-  const [sendMessage, isTyping] = useSocket();
+  const [sendMessage, isTyping, joinRoom] = useSocket();
   const dispatch = useDispatch();
   const scrollRef = useRef();
   const dateOptions = ["en-US", { hour: "2-digit", minute: "2-digit" }];
 
   useEffect(() => {
-    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    if (scrollRef.current)
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, [messages]);
 
   const handleSendMessage = () => {
@@ -111,7 +113,6 @@ const Message = ({
   };
 
   const typingUsers = useMemo(() => {
-    console.log("come");
     const to = isChannel ? chatName : _id;
     const show = typing.isTyping && typing.users[to] && typing.users[to].length;
 
@@ -133,28 +134,44 @@ const Message = ({
 
   return (
     <div className="message">
-      <div className="message__texts" ref={scrollRef}>
-        {messages[chatName] ? renderMessages : null}
-        {typingUsers}
-      </div>
-      <div className="communication">
-        <motion.form
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.9, ease: "easeIn" }}
-        >
-          <textarea
-            name="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
-            onKeyDown={handleBackSpace}
-            onFocus={() => typingStatus(true)}
-            onBlur={() => typingStatus(false)}
-          />
-          <button onClick={() => console.log("record voice")} />
-        </motion.form>
-      </div>
+      {channels.includes(chatName) ? (
+        <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <h2>Join this channel</h2>
+          <button
+            onClick={() => {
+              joinRoom(chatName, true);
+              dispatch(createNewChannel(chatName));
+            }}
+          >
+            Join
+          </button>
+        </motion.section>
+      ) : (
+        <>
+          <div className="message__texts" ref={scrollRef}>
+            {messages[chatName] ? renderMessages : null}
+          </div>
+          {typingUsers}
+          <div className="communication">
+            <motion.form
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.9, ease: "easeIn" }}
+            >
+              <textarea
+                name="message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyPress={handleKeyPress}
+                onKeyDown={handleBackSpace}
+                onFocus={() => typingStatus(true)}
+                onBlur={() => typingStatus(false)}
+              />
+              <button onClick={() => console.log("record voice")} />
+            </motion.form>
+          </div>
+        </>
+      )}
     </div>
   );
 };
@@ -165,6 +182,7 @@ const mapStateToProps = (state) => ({
   username: state.username,
   messages: state.messages,
   typing: state.typing,
+  channels: state.channels,
   _id: state.socket_id,
 });
 
