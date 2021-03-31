@@ -19,6 +19,8 @@ const messages = {
   general: [],
 };
 
+const channels = [];
+
 io.on("connection", (socket) => {
   socket.on("join", (username) => {
     users.push({
@@ -26,11 +28,21 @@ io.on("connection", (socket) => {
       username,
     });
     io.emit("new user", users);
+    socket.emit("channels", channels);
   });
+
   socket.on("join room", (roomName, cb) => {
     socket.join(roomName);
     cb(messages[roomName], roomName);
   });
+
+  socket.on("create room", (room) => {
+    if (!channels.includes(room)) {
+      channels.push(room);
+      io.emit("channels", channels);
+    }
+  });
+
   socket.on(
     "send message",
     ({ content, to, sender, chatName, isChannel, time }) => {
