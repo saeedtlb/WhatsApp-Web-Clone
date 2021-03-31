@@ -23,45 +23,6 @@
   position: relative;
 }
 
-.message__texts > .typing {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: absolute;
-  bottom: 0;
-  color: rgba(30, 190, 113, 0.5);
-}
-
-.message__texts > .typing .dots {
-  margin-left: 5px;
-}
-
-.message__texts > .typing .dots span {
-  display: inline-block;
-  background-color: #6cad96;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  margin-right: 4px;
-  -webkit-animation: typing 1.5s infinite ease-in-out;
-          animation: typing 1.5s infinite ease-in-out;
-}
-
-.message__texts > .typing .dots span:nth-child(1) {
-  -webkit-animation-delay: 150ms;
-          animation-delay: 150ms;
-}
-
-.message__texts > .typing .dots span:nth-child(2) {
-  -webkit-animation-delay: 250ms;
-          animation-delay: 250ms;
-}
-
-.message__texts > .typing .dots span:nth-child(3) {
-  -webkit-animation-delay: 350ms;
-          animation-delay: 350ms;
-}
-
 .message__texts > div {
   max-width: 49%;
   border-radius: 10px;
@@ -146,6 +107,74 @@
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+}
+
+.message .typing {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  color: rgba(30, 190, 113, 0.5);
+}
+
+.message .typing .dots {
+  margin-left: 5px;
+}
+
+.message .typing .dots span {
+  display: inline-block;
+  background-color: #6cad96;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 4px;
+  -webkit-animation: typing 1.5s infinite ease-in-out;
+          animation: typing 1.5s infinite ease-in-out;
+}
+
+.message .typing .dots span:nth-child(1) {
+  -webkit-animation-delay: 150ms;
+          animation-delay: 150ms;
+}
+
+.message .typing .dots span:nth-child(2) {
+  -webkit-animation-delay: 250ms;
+          animation-delay: 250ms;
+}
+
+.message .typing .dots span:nth-child(3) {
+  -webkit-animation-delay: 350ms;
+          animation-delay: 350ms;
+}
+
+.message section {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+  text-transform: uppercase;
+}
+
+.message button {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  background: linear-gradient(45deg, #38be71, lightgreen 50%);
 }
 
 @-webkit-keyframes typing {
