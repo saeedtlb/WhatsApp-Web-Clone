@@ -199,7 +199,7 @@ const Message = ({
                 onFocus={() => typingStatus(true)}
                 onBlur={() => typingStatus(false)}
               />
-              <div>
+              <div className="btns">
                 <button
                   className="emoji"
                   onMouseEnter={(e) => handleEmojiPicker(e, true)}
