@@ -1,4 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from "react";
+// emoji
+import Picker from "emoji-picker-react";
 // style
 import "../../../styles/Css/message.css";
 // redux Store
@@ -9,6 +11,11 @@ import { useSocket } from "../../../hook/useSocket";
 // animate
 import { motion } from "framer-motion";
 
+const emoji_variants = {
+  show: { scale: 1, opacity: 1 },
+  hide: { scale: 0, opacity: 0 },
+};
+
 const Message = ({
   currentChat: { isChannel, chatName, reciever_id },
   username,
@@ -18,6 +25,7 @@ const Message = ({
   _id,
 }) => {
   const [message, setMessage] = useState("");
+  const [emoji, setEmoji] = useState(false);
   const [sendMessage, isTyping, joinRoom] = useSocket();
   const dispatch = useDispatch();
   const scrollRef = useRef();
@@ -132,12 +140,20 @@ const Message = ({
     ) : null;
   }, [typing, _id, chatName, isChannel]);
 
+  const handleEmojiPicker = (e, open = false) => {
+    e.preventDefault();
+
+    open && setEmoji(true);
+    if (emoji && !open) setEmoji(false);
+  };
+
   return (
-    <div className="message">
+    <div className="message" onClick={handleEmojiPicker}>
       {channels.includes(chatName) ? (
         <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <h2>Join this channel</h2>
           <button
+            className="join"
             onClick={() => {
               joinRoom(chatName, true);
               dispatch(createNewChannel(chatName));
@@ -152,6 +168,22 @@ const Message = ({
             {messages[chatName] ? renderMessages : null}
           </div>
           {typingUsers}
+          <motion.div
+            className="emoji__picker"
+            variants={emoji_variants}
+            animate={emoji ? "show" : "hide"}
+            onMouseLeave={() => setEmoji(false)}
+          >
+            <Picker
+              preload={true}
+              native={true}
+              disableAutoFocus={true}
+              onEmojiClick={(e, emojiObj) => {
+                e.stopPropagation();
+                setMessage((message) => message + emojiObj.emoji);
+              }}
+            />
+          </motion.div>
           <div className="communication">
             <motion.form
               initial={{ opacity: 0 }}
@@ -167,7 +199,17 @@ const Message = ({
                 onFocus={() => typingStatus(true)}
                 onBlur={() => typingStatus(false)}
               />
-              <button onClick={() => console.log("record voice")} />
+              <div>
+                <button
+                  className="emoji"
+                  onMouseEnter={(e) => handleEmojiPicker(e, true)}
+                  onClick={handleEmojiPicker}
+                />
+                <button
+                  className="voice"
+                  onClick={() => console.log("record voice")}
+                />
+              </div>
             </motion.form>
           </div>
         </>
