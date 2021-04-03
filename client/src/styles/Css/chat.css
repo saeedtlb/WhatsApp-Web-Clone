@@ -2,7 +2,7 @@
   height: 85%;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 100px 1fr 4fr 50px;
-      grid-template-columns: 100px 1fr 4fr 50px;
+  -ms-grid-columns: 100px 1fr 4fr;
+      grid-template-columns: 100px 1fr 4fr;
 }
 /*# sourceMappingURL=chat.css.map */
