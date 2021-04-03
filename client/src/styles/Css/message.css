@@ -1,7 +1,8 @@
 .message {
   overflow: hidden;
-  padding: 10px;
+  padding: 15px;
   padding-bottom: 5px;
+  background: url("../icons/wallpaper.png");
 }
 
 .message__texts {
@@ -77,6 +78,10 @@
           align-items: center;
 }
 
+.message .communication form > * {
+  height: 50px;
+}
+
 .message .communication form textarea {
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -86,6 +91,13 @@
   outline: none;
   padding: 5px;
   font-size: 16px;
+  border: none;
+  border-radius: 10px 0 0 10px;
+}
+
+.message .communication form .btns {
+  background-color: #fff;
+  border-radius: 0 10px 10px 0;
 }
 
 .message .communication form button {
