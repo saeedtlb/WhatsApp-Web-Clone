@@ -1,6 +1,8 @@
 .navigation {
   min-height: 250px;
-  height: 30%;
+  padding-top: 10px;
+  gap: 25px;
+  background: #e5ddd5;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -8,8 +10,6 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -29,7 +29,7 @@
   fill: gray;
 }
 
-[class|='out'] {
+[class|="out"] {
   -webkit-transform-origin: center;
           transform-origin: center;
   -webkit-animation: rotate cubic-bezier(0.14, 1.15, 0.68, 0.4) infinite;

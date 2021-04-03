@@ -1,9 +1,12 @@
 .navigation {
   min-height: 250px;
-  height: 30%;
+  //   height: 30%;
+  padding-top: 10px;
+  gap: 25px;
+  background: #e5ddd5;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  //   justify-content: space-around;
   align-items: center;
 
   & > div {
@@ -21,7 +24,7 @@
   fill: gray;
 }
 
-[class|='out'] {
+[class|="out"] {
   transform-origin: center;
   animation: rotate cubic-bezier(0.14, 1.15, 0.68, 0.4) infinite;
 }
