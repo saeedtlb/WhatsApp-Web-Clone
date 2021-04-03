@@ -3,7 +3,8 @@
 // chat UI
 .message {
   overflow: hidden;
-  padding: 10px 0 5px 10px;
+  padding: 10px;
+  padding-bottom: 5px;
 
   &__texts {
     height: 85%;
@@ -59,9 +60,9 @@
     form {
       height: 100%;
       display: flex;
-      justify-content: space-between;
+      //   justify-content: space-between;
       align-items: center;
-      gap: 15px;
+      //   gap: 15px;
 
       textarea {
         flex: 1;
@@ -70,23 +71,22 @@
         outline: none;
         padding: 5px;
         font-size: 16px;
+        // border: none;
       }
 
       button {
         width: 50px;
         height: 50px;
-        background-color: $whatsApp_color;
+        background-color: transparent;
         border: none;
         border-radius: 100%;
-        position: relative;
+      }
 
-        &::before {
-          content: url("../icons/microphone.png");
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
+      .voice::before {
+        content: url("../icons/microphone.svg");
+      }
+      .emoji::before {
+        content: url("../icons/smile.svg");
       }
     }
   }
@@ -133,7 +133,7 @@
     text-transform: uppercase;
   }
 
-  button {
+  button.join {
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -143,6 +143,13 @@
     letter-spacing: 0.1em;
     background: linear-gradient(45deg, #38be71, lightgreen 50%);
   }
+}
+// Emoji
+.emoji__picker {
+  position: absolute;
+  bottom: 100px;
+  right: 20px;
+  transform-origin: bottom right;
 }
 
 // Animation

@@ -1,6 +1,7 @@
 .message {
   overflow: hidden;
-  padding: 10px 0 5px 10px;
+  padding: 10px;
+  padding-bottom: 5px;
 }
 
 .message__texts {
@@ -71,13 +72,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 15px;
 }
 
 .message .communication form textarea {
@@ -94,19 +91,17 @@
 .message .communication form button {
   width: 50px;
   height: 50px;
-  background-color: #1ebe71;
+  background-color: transparent;
   border: none;
   border-radius: 100%;
-  position: relative;
 }
 
-.message .communication form button::before {
-  content: url("../icons/microphone.png");
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+.message .communication form .voice::before {
+  content: url("../icons/microphone.svg");
+}
+
+.message .communication form .emoji::before {
+  content: url("../icons/smile.svg");
 }
 
 .message .typing {
@@ -166,7 +161,7 @@
   text-transform: uppercase;
 }
 
-.message button {
+.message button.join {
   width: 200px;
   height: 200px;
   border-radius: 50%;
@@ -175,6 +170,14 @@
   font-weight: bold;
   letter-spacing: 0.1em;
   background: linear-gradient(45deg, #38be71, lightgreen 50%);
+}
+
+.emoji__picker {
+  position: absolute;
+  bottom: 100px;
+  right: 20px;
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right;
 }
 
 @-webkit-keyframes typing {
