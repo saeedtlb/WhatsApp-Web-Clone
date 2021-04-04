@@ -3,6 +3,7 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import Picker from "emoji-picker-react";
 // style
 import "../../../styles/Css/message.css";
+import { ReactComponent as Microphone } from "../../../styles/icons/microphone.svg";
 // redux Store
 import { connect, useDispatch } from "react-redux";
 import { setMessages, createNewChannel } from "../../../actions";
@@ -92,7 +93,7 @@ const Message = ({
     [username, chatName, isChannel, messages]
   );
 
-  const handleBackSpace = (e) => {
+  const handleBackSpace = e => {
     if (e.key === "Backspace") {
       const { rows, value } = e.target;
 
@@ -104,7 +105,7 @@ const Message = ({
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = e => {
     if (e.key === "Enter") {
       if (e.shiftKey) {
         const { rows } = e.target;
@@ -116,7 +117,7 @@ const Message = ({
     }
   };
 
-  const typingStatus = (status) => {
+  const typingStatus = status => {
     const payload = {
       username,
       typing: status,
@@ -153,6 +154,16 @@ const Message = ({
     if (emoji && !open) setEmoji(false);
   };
 
+  const startRecording = e => {
+    e.target.classList.add("active");
+
+    // start recording
+  };
+
+  const finishRecording = e => {
+    e.target.classList.remove("active");
+  };
+
   return (
     <div className="message" onClick={handleEmojiPicker}>
       {channels.includes(chatName) ? (
@@ -186,7 +197,7 @@ const Message = ({
               disableAutoFocus={true}
               onEmojiClick={(e, emojiObj) => {
                 e.stopPropagation();
-                setMessage((message) => message + emojiObj.emoji);
+                setMessage(message => message + emojiObj.emoji);
               }}
             />
           </motion.div>
@@ -199,7 +210,7 @@ const Message = ({
               <textarea
                 name="message"
                 value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                onChange={e => setMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 onKeyDown={handleBackSpace}
                 onFocus={() => typingStatus(true)}
@@ -208,15 +219,16 @@ const Message = ({
               <div className="btns">
                 <button
                   className="emoji"
-                  onMouseEnter={(e) => handleEmojiPicker(e, true)}
+                  onMouseEnter={e => handleEmojiPicker(e, true)}
                   onClick={handleEmojiPicker}
                 />
                 <button
                   className="voice"
-                  onMouseDown={() => console.log("start")}
-                  onMouseUp={() => console.log("finish")}
-                  onClickCapture={() => console.log("start85")}
-                />
+                  onMouseDown={startRecording}
+                  onMouseUp={finishRecording}
+                >
+                  <Microphone />
+                </button>
               </div>
             </motion.form>
           </div>
@@ -227,7 +239,7 @@ const Message = ({
 };
 
 // send store values as props to component
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   currentChat: state.currentChat,
   username: state.username,
   messages: state.messages,
