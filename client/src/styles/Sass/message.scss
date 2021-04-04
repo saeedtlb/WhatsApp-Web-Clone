@@ -91,8 +91,28 @@
         border-radius: 100%;
       }
 
-      .voice::before {
-        content: url("../icons/microphone.svg");
+      .voice {
+        position: relative;
+
+        svg,
+        svg * {
+          pointer-events: none;
+          position: inherit;
+          z-index: 5;
+          transition: fill 100ms ease-out;
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: $whatsApp_color;
+          border-radius: 50%;
+          transform: scale(0);
+          transition: transform 200ms ease-out;
+        }
       }
       .emoji::before {
         content: url("../icons/smile.svg");
@@ -128,6 +148,28 @@
         animation-delay: 350ms;
       }
     }
+  }
+}
+// Record voice button
+.voice.active {
+  svg {
+    fill: #fff;
+  }
+
+  &::after {
+    transform: scale(1) !important;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background-color: lightgreen;
+    top: -10px;
+    left: -10px;
+    border-radius: 50%;
+    animation: record 2s alternate infinite linear;
   }
 }
 // Join UI
@@ -174,5 +216,17 @@
   50% {
     transform: translateY(0);
     background-color: #b5d9cb;
+  }
+}
+
+@keyframes record {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(0.8);
   }
 }
