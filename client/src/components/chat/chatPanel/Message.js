@@ -10,6 +10,8 @@ import { setMessages, createNewChannel } from "../../../actions";
 import { useSocket } from "../../../hook/useSocket";
 // animate
 import { motion } from "framer-motion";
+// send audio
+import audio from "../../../assets/send.wav";
 
 const emoji_variants = {
   show: { scale: 1, opacity: 1 },
@@ -30,6 +32,7 @@ const Message = ({
   const dispatch = useDispatch();
   const scrollRef = useRef();
   const dateOptions = ["en-US", { hour: "2-digit", minute: "2-digit" }];
+  const sendAudio = new Audio(audio);
 
   useEffect(() => {
     if (scrollRef.current)
@@ -41,6 +44,9 @@ const Message = ({
 
     // is empty?
     if (!content) return;
+
+    // play a sending sound
+    sendAudio.play();
 
     const time = new Date().toLocaleTimeString(...dateOptions);
 
@@ -207,7 +213,9 @@ const Message = ({
                 />
                 <button
                   className="voice"
-                  onClick={() => console.log("record voice")}
+                  onMouseDown={() => console.log("start")}
+                  onMouseUp={() => console.log("finish")}
+                  onClickCapture={() => console.log("start85")}
                 />
               </div>
             </motion.form>
