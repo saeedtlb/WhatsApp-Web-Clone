@@ -1,12 +1,10 @@
 .navigation {
   min-height: 250px;
-  //   height: 30%;
   padding-top: 10px;
   gap: 25px;
-  background: #e5ddd5;
+  background: linear-gradient(to right, #e5ddd5 90%, transparent);
   display: flex;
   flex-direction: column;
-  //   justify-content: space-around;
   align-items: center;
 
   & > div {
