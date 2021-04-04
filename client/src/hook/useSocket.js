@@ -10,12 +10,15 @@ import {
   setTyping,
   newChannels,
 } from "../actions/index";
+// recieve sound
+import recieve from "../assets/recieve.mp3";
 
 let socket;
 
 export const useCreateSocket = (user) => {
   const dispatch = useDispatch();
   const [, , joinRoom] = useSocket();
+  const recieveAudio = new Audio(recieve);
 
   const ENDPOINT = "http://localhost:8080";
 
@@ -31,6 +34,9 @@ export const useCreateSocket = (user) => {
     socket.on("channels", (channels) => dispatch(newChannels(channels)));
     socket.on("new user", (allUsers) => dispatch(setAllUsers(allUsers)));
     socket.on("new message", ({ chatName, ...res }) => {
+      // play recieve sound
+      recieveAudio.play();
+
       dispatch(setMessages(res, chatName));
       // this will send notification if pass conditions
       dispatch(setNotification(chatName, res));
