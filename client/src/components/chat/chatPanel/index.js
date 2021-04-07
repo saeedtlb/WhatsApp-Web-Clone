@@ -1,4 +1,3 @@
-import React from "react";
 // components
 import Navigation from "./Navigation";
 import Contacts from "./Contacts";
