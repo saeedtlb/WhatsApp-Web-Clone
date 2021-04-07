@@ -2,13 +2,16 @@
 
 // chat UI
 .message {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   padding: 15px;
   padding-bottom: 5px;
-  background: url("../icons/wallpaper.png");
 
   &__texts {
-    height: 85%;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -56,7 +59,7 @@
   }
 
   .communication {
-    height: 15%;
+    min-height: 60px;
 
     form {
       height: 100%;
@@ -81,10 +84,14 @@
       .btns {
         background-color: #fff;
         border-radius: 0 10px 10px 0;
+
+        & > :nth-child(2) {
+          margin: 0 10px;
+        }
       }
 
       button {
-        width: 50px;
+        width: 25px;
         height: 50px;
         background-color: transparent;
         border: none;
@@ -172,6 +179,41 @@
     animation: record 2s alternate infinite linear;
   }
 }
+.voice__message {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: rgba(56, 190, 113, 0.51);
+
+  .play__pause {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 50px;
+    background-color: #fff;
+
+    svg {
+      width: 50%;
+      height: 100%;
+    }
+  }
+
+  .seek {
+    flex: 1;
+    width: 200px;
+    height: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+
+    .fill {
+      width: 0;
+      border-radius: 5px;
+      background-color: #000;
+    }
+  }
+}
 // Join UI
 .message {
   section {
@@ -228,5 +270,20 @@
   }
   100% {
     transform: scale(0.8);
+  }
+}
+
+// responsive
+@media only screen and (max-width: 450px) {
+  .message {
+    padding: 15px 5px 0;
+
+    &__texts {
+      height: 89%;
+    }
+
+    .communication {
+      height: 10%;
+    }
   }
 }
