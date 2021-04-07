@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 // helper
 import UserIcon from "../../misc/UserIcon";
 // icon
@@ -23,6 +23,7 @@ const Contacts = ({
     notification,
   },
 }) => {
+  const [show, setShow] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const Contacts = ({
 
   const renderChatSections = (chats, type) =>
     chats
-      ? chats.map((chat) => {
+      ? chats.map(chat => {
           if (type === "user" && chat.username === username) return;
 
           const changedChat =
@@ -89,42 +90,56 @@ const Contacts = ({
         })
       : null;
 
+  const sideMenu = e => {
+    e.preventDefault();
+    setShow(!show);
+  };
+
   return (
-    <motion.div
-      className="contacts"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
-    >
-      <div className="filter">
-        <label>
-          <input type="checkbox" />
-          <span></span>
-        </label>
-        <h4>unread only</h4>
-      </div>
+    <>
+      <motion.button
+        className="show__cantacts"
+        onClick={sideMenu}
+        initial={{ x: 0 }}
+        animate={show ? { x: -90 } : { x: 0 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
+      />
+      <motion.div
+        className="contacts"
+        initial={{ left: -90 }}
+        animate={show ? { left: -90, width: 0 } : { left: 0, width: "initial" }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+      >
+        <div className="filter">
+          <label>
+            <input type="checkbox" />
+            <span></span>
+          </label>
+          <h4>unread only</h4>
+        </div>
 
-      <div className="contacts__box">
-        {renderChatSections(channels, "newRoom")}
-        <hr />
-        {renderChatSections(connectedRooms, "room")}
-        <hr />
-        {renderChatSections(allUsers, "user")}
-      </div>
+        <div className="contacts__box">
+          {renderChatSections(channels, "newRoom")}
+          <hr />
+          {renderChatSections(connectedRooms, "room")}
+          <hr />
+          {renderChatSections(allUsers, "user")}
+        </div>
 
-      <div className="bottom">
-        <h2>You've reached the end.</h2>
-        <h3>Create new group!</h3>
-        <img
-          src={addMore}
-          alt="create group"
-          onClick={() => setChannelForm(true)}
-        />
-      </div>
-    </motion.div>
+        <div className="bottom">
+          <h2>You've reached the end.</h2>
+          <h3>Create new group!</h3>
+          <img
+            src={addMore}
+            alt="create group"
+            onClick={() => setChannelForm(true)}
+          />
+        </div>
+      </motion.div>
+    </>
   );
 };
 
-const mapStateToProps = (state) => ({ state });
+const mapStateToProps = state => ({ state });
 
 export default connect(mapStateToProps)(Contacts);
