@@ -87,6 +87,11 @@ header {
           display: none;
         }
       }
+      @media only screen and (max-width: 600px) {
+        .call {
+          display: none;
+        }
+      }
 
       & > div {
         width: 25px;
@@ -101,7 +106,7 @@ header {
   }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 700px) {
   .top {
     grid-template-columns: 80px 1fr 100px !important;
 
@@ -111,6 +116,26 @@ header {
 
     .userBox__left .text {
       display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  header {
+    height: 90px;
+    min-height: 90px;
+    padding: 10px 20px;
+    display: block;
+
+    .wrapper {
+      height: 100%;
+
+      .top {
+        display: none;
+      }
+      .bottom {
+        display: inherit;
+      }
     }
   }
 }
