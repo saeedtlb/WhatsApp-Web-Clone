@@ -111,18 +111,23 @@
         &::after {
           content: "";
           position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
+          left: -6px;
+          top: 5px;
+          width: 40px;
+          height: 40px;
           background-color: $whatsApp_color;
           border-radius: 50%;
           transform: scale(0);
           transition: transform 200ms ease-out;
         }
       }
-      .emoji::before {
-        content: url("../icons/smile.svg");
+      .emoji {
+        position: relative;
+        z-index: 10;
+
+        &::before {
+          content: url("../icons/smile.svg");
+        }
       }
     }
   }
@@ -170,11 +175,11 @@
   &::before {
     content: "";
     position: absolute;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     background-color: lightgreen;
-    top: -10px;
-    left: -10px;
+    top: -5px;
+    left: -15px;
     border-radius: 50%;
     animation: record 2s alternate infinite linear;
   }
