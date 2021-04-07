@@ -2,8 +2,8 @@
   min-height: 250px;
   padding-top: 10px;
   gap: 25px;
-  background: -webkit-gradient(linear, left top, right top, color-stop(90%, #e5ddd5), to(transparent));
-  background: linear-gradient(to right, #e5ddd5 90%, transparent);
+  background: -webkit-gradient(linear, left top, right top, color-stop(90%, #e5ddd5), to(#fff));
+  background: linear-gradient(to right, #e5ddd5 90%, #fff);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -95,6 +95,12 @@
   100% {
     -webkit-transform: rotate(-360deg);
             transform: rotate(-360deg);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .navigation {
+    display: none;
   }
 }
 /*# sourceMappingURL=navigation.css.map */

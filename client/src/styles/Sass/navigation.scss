@@ -2,7 +2,7 @@
   min-height: 250px;
   padding-top: 10px;
   gap: 25px;
-  background: linear-gradient(to right, #e5ddd5 90%, transparent);
+  background: linear-gradient(to right, #e5ddd5 90%, #fff);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,5 +57,12 @@
 
   100% {
     transform: rotate(-360deg);
+  }
+}
+
+// remove this part on small devices
+@media only screen and (max-width: 600px) {
+  .navigation {
+    display: none;
   }
 }
