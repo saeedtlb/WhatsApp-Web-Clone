@@ -16,25 +16,25 @@ const Chat = ({ user, currentChat, history }) => {
   const [channelForm, setChannelForm] = useState(false);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!user) {
-      history.push("/");
-      return;
-    }
-  }, [user, history]);
+  //   useEffect(() => {
+  //     if (!user) {
+  //       history.push("/");
+  //       return;
+  //     }
+  //   }, [user, history]);
 
-  useEffect(() => {
-    (async () => {
-      if (Notification.permission === "granted") {
-        dispatch(setNotificationPermission("granted"));
-      } else if (Notification.permission !== "denied") {
-        const permission = await Notification.requestPermission();
-        dispatch(setNotificationPermission(permission));
-      }
-    })();
-  }, [dispatch]);
+  //   useEffect(() => {
+  //     (async () => {
+  //       if (Notification.permission === "granted") {
+  //         dispatch(setNotificationPermission("granted"));
+  //       } else if (Notification.permission !== "denied") {
+  //         const permission = await Notification.requestPermission();
+  //         dispatch(setNotificationPermission(permission));
+  //       }
+  //     })();
+  //   }, [dispatch]);
 
-  useCreateSocket(user);
+  //   useCreateSocket(user);
 
   return (
     <motion.main
@@ -54,7 +54,7 @@ const Chat = ({ user, currentChat, history }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   user: state.username,
   currentChat: state.currentChat,
 });
