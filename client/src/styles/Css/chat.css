@@ -1,8 +1,26 @@
 .chat__panel {
-  height: 85%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 100px 1fr 4fr;
       grid-template-columns: 100px 1fr 4fr;
+  background: url("../icons/wallpaper.png");
+}
+
+@media only screen and (max-width: 1000px), (max-height: 700px) {
+  .chat__panel {
+    -ms-grid-columns: 100px 100px 4fr;
+        grid-template-columns: 100px 100px 4fr;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .chat__panel {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 /*# sourceMappingURL=chat.css.map */

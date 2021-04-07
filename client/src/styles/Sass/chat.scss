@@ -1,5 +1,13 @@
 .chat__panel {
-  height: 85%;
+  flex: 1;
   display: grid;
   grid-template-columns: 100px 1fr 4fr;
+  background: url("../icons/wallpaper.png");
+
+  @media only screen and (max-width: 1000px), (max-height: 700px) {
+    grid-template-columns: 100px 100px 4fr;
+  }
+  @media only screen and (max-width: 600px) {
+    display: flex;
+  }
 }
