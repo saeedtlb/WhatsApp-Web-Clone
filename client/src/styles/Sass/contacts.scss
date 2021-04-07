@@ -10,12 +10,31 @@
 }
 
 .contacts {
-  height: 108%;
+  height: 112%;
   transform: translateY(-70px);
   background: #fff;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
+}
+
+button.show__cantacts {
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 0 50% 50% 0;
+  background-color: black;
+  position: absolute;
+  top: 100px;
+  left: 90px;
+  z-index: 10;
+  opacity: 0.25;
+  transition: opacity 0.2s ease-out;
+  display: none;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .contacts .filter {
@@ -66,7 +85,7 @@
 }
 
 .contacts__box {
-  flex: 0.95;
+  flex: 0.9;
   min-width: 250px;
   overflow-y: auto;
 
@@ -84,7 +103,7 @@
 
     &__left .text {
       color: black;
-      @media only screen and (max-width: 1200px) {
+      @media only screen and (max-width: 1200px), (max-height: 700px) {
         display: none;
       }
     }
@@ -104,7 +123,7 @@
   }
 }
 
-@media only screen and (max-width: 1050px) {
+@media only screen and (max-width: 1000px), (max-height: 700px) {
   .contacts .filter {
     padding: 10px;
 
@@ -117,6 +136,7 @@
 
     .userBox {
       padding: 10px;
+      justify-content: center;
 
       &__right {
         display: none;
@@ -124,11 +144,19 @@
     }
   }
 
-  .contacts .bottom {
-    text-align: initial;
+  .contacts .bottom :not(img) {
+    display: none;
+  }
+}
 
-    :not(img) {
-      display: none;
-    }
+@media only screen and (max-width: 600px) {
+  .contacts {
+    position: relative;
+    border-radius: 0 15px 15px 0;
+    transform: initial;
+    height: initial;
+  }
+  button.show__cantacts {
+    display: block;
   }
 }
