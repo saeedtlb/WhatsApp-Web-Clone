@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // custom hook
 import { useCreateSocket } from "../../hook/useSocket";
 // helper
-import CreateChannel from "../misc/CreateChannel";
+import CreateChannel from "../misc/message/CreateChannel";
 // components
 import Header from "./Header";
 import ChatPanel from "./chatPanel";
