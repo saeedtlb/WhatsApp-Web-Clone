@@ -10,18 +10,18 @@ import { connect, useDispatch } from "react-redux";
 // action
 import { setUserName } from "../actions";
 
+const variants = {
+  show: { y: 0, height: "auto" },
+  hide: { y: "-100%", height: 0 },
+};
+
 const SignIn = ({ allUsers, username, history }) => {
   const [name, setName] = useState("");
   const [err, setErr] = useState(false);
 
   const dispatch = useDispatch();
 
-  const variants = {
-    show: { y: 0, height: "auto" },
-    hide: { y: "-100%", height: 0 },
-  };
-
-  const submitForm = (e) => {
+  const submitForm = e => {
     e.preventDefault();
 
     const typedName = name.trim().toLowerCase();
@@ -71,7 +71,7 @@ const SignIn = ({ allUsers, username, history }) => {
                   name="name"
                   id="username"
                   autoComplete="off"
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={e => setName(e.target.value)}
                   onFocus={() => err && setErr(false)}
                 />
               </section>
@@ -93,7 +93,7 @@ const SignIn = ({ allUsers, username, history }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   allUsers: state.allUsers,
   username: state.username,
 });
