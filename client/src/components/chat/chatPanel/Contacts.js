@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 // helper
 import UserIcon from "../../misc/UserIcon";
+import Filter from "../../misc/Filter";
 // icon
 import addMore from "../../../styles/icons/addMore.png";
 // style
@@ -90,16 +91,11 @@ const Contacts = ({
         })
       : null;
 
-  const sideMenu = e => {
-    e.preventDefault();
-    setShow(!show);
-  };
-
   return (
     <>
       <motion.button
         className="show__cantacts"
-        onClick={sideMenu}
+        onClick={() => setShow(!show)}
         initial={{ x: 0 }}
         animate={show ? { x: -90 } : { x: 0 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
@@ -110,13 +106,7 @@ const Contacts = ({
         animate={show ? { left: -90, width: 0 } : { left: 0, width: "initial" }}
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
-        <div className="filter">
-          <label>
-            <input type="checkbox" />
-            <span></span>
-          </label>
-          <h4>unread only</h4>
-        </div>
+        <Filter />
 
         <div className="contacts__box">
           {renderChatSections(channels, "newRoom")}
