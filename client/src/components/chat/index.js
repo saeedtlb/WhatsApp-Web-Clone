@@ -39,9 +39,9 @@ const Chat = ({ user, currentChat, history }) => {
   return (
     <motion.main
       style={{ height: "100%" }}
-      initial={{ scaleY: 0 }}
-      animate={{ scaleY: 1 }}
-      exit={{ scaleY: 0 }}
+      initial={{ x: "-100%" }}
+      animate={{ x: 0 }}
+      exit={{ x: "-100%" }}
       transition={{ duration: 0.5 }}
     >
       <Header username={user} currentChat={currentChat} />
