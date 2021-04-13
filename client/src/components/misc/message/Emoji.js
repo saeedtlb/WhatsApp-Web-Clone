@@ -1,8 +1,11 @@
 // emoji
-import Picker from "emoji-picker-react";
+import { EmojiPicker } from "react-twemoji-picker";
+import EmojiData from "react-twemoji-picker/data/twemoji.json";
+import "react-twemoji-picker/dist/EmojiPicker.css";
 // animate
 import { motion } from "framer-motion";
-import { useEffect, useMemo } from "react";
+// helper
+import { onEmojiClick } from "../../misc/helpers";
 
 const emoji_variants = {
   show: { scale: 1, opacity: 1 },
@@ -10,36 +13,27 @@ const emoji_variants = {
 };
 
 const Emoji = ({ emoji, setEmoji, setMessage }) => {
-  const selectEmoji = (e, emojiObj) => {
-    e.stopPropagation();
-    setMessage(message => message + emojiObj.emoji);
+  const emojiData = Object.freeze(EmojiData);
+
+  const selectEmoji = _emoji => {
+    const emj = onEmojiClick(_emoji);
+    setMessage(message => message + emj);
   };
 
-  useEffect(() => console.log(Math.random()));
-
-  return useMemo(
-    () => (
-      <motion.div
-        className="emoji__picker"
-        variants={emoji_variants}
-        animate={emoji ? "show" : "hide"}
-        onMouseLeave={() => setEmoji(false)}
-      >
-        <Picker onEmojiClick={selectEmoji} />
-      </motion.div>
-    ),
-    [emoji]
+  return (
+    <motion.div
+      className="emoji__picker"
+      variants={emoji_variants}
+      animate={emoji ? "show" : "hide"}
+      onMouseLeave={() => setEmoji(false)}
+    >
+      <EmojiPicker
+        emojiData={emojiData}
+        showNavbar={true}
+        onEmojiSelect={selectEmoji}
+      />
+    </motion.div>
   );
-  //   return (
-  //     <motion.div
-  //       className="emoji__picker"
-  //       variants={emoji_variants}
-  //       animate={emoji ? "show" : "hide"}
-  //       onMouseLeave={() => setEmoji(false)}
-  //     >
-  //       <Picker onEmojiClick={selectEmoji} />
-  //     </motion.div>
-  //   );
 };
 
 export default Emoji;
