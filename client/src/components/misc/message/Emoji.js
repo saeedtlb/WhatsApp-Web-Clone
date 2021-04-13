@@ -2,6 +2,7 @@
 import Picker from "emoji-picker-react";
 // animate
 import { motion } from "framer-motion";
+import { useEffect, useMemo } from "react";
 
 const emoji_variants = {
   show: { scale: 1, opacity: 1 },
@@ -14,21 +15,31 @@ const Emoji = ({ emoji, setEmoji, setMessage }) => {
     setMessage(message => message + emojiObj.emoji);
   };
 
-  return (
-    <motion.div
-      className="emoji__picker"
-      variants={emoji_variants}
-      animate={emoji ? "show" : "hide"}
-      onMouseLeave={() => setEmoji(false)}
-    >
-      <Picker
-        preload={true}
-        native={true}
-        disableAutoFocus={true}
-        onEmojiClick={selectEmoji}
-      />
-    </motion.div>
+  useEffect(() => console.log(Math.random()));
+
+  return useMemo(
+    () => (
+      <motion.div
+        className="emoji__picker"
+        variants={emoji_variants}
+        animate={emoji ? "show" : "hide"}
+        onMouseLeave={() => setEmoji(false)}
+      >
+        <Picker onEmojiClick={selectEmoji} />
+      </motion.div>
+    ),
+    [emoji]
   );
+  //   return (
+  //     <motion.div
+  //       className="emoji__picker"
+  //       variants={emoji_variants}
+  //       animate={emoji ? "show" : "hide"}
+  //       onMouseLeave={() => setEmoji(false)}
+  //     >
+  //       <Picker onEmojiClick={selectEmoji} />
+  //     </motion.div>
+  //   );
 };
 
 export default Emoji;
