@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 // redux dispatch
 import { useDispatch } from "react-redux";
 // custom hook
-import { useSocket } from "../../hook/useSocket";
+import { useSocket } from "../../../hook/useSocket";
 // action
-import { createNewChannel } from "../../actions/index";
+import { createNewChannel } from "../../../actions";
 
 const JoinChannel = ({ chatName }) => {
   const dispatch = useDispatch();

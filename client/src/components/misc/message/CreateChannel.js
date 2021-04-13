@@ -1,15 +1,15 @@
 import { useRef, useState } from "react";
 // icon
-import { ReactComponent as Close } from "../../styles/icons/close.svg";
+import { ReactComponent as Close } from "../../../styles/icons/close.svg";
 // style
-import "../../styles/Css/channel.css";
+import "../../../styles/Css/channel.css";
 // animate
 import { motion, AnimatePresence } from "framer-motion";
 // redux
 import { connect, useDispatch } from "react-redux";
-import { createNewChannel } from "../../actions";
+import { createNewChannel } from "../../../actions";
 // custom hook
-import { useSocket } from "../../hook/useSocket";
+import { useSocket } from "../../../hook/useSocket";
 
 const CreateChannel = ({ channelForm, setChannelForm, rooms }) => {
   const [channelName, setChannelName] = useState("");
@@ -18,7 +18,7 @@ const CreateChannel = ({ channelForm, setChannelForm, rooms }) => {
   const ref = useRef();
   const dispatch = useDispatch();
 
-  const newChannel = (e) => {
+  const newChannel = e => {
     e.preventDefault();
 
     const name = channelName.trim().toLowerCase();
@@ -66,7 +66,7 @@ const CreateChannel = ({ channelForm, setChannelForm, rooms }) => {
                 type="text"
                 placeholder="javaScript"
                 value={channelName}
-                onChange={(e) => setChannelName(e.target.value)}
+                onChange={e => setChannelName(e.target.value)}
                 onFocus={() => err[0] && setErr([false, ""])}
               />
               <div className="error">
@@ -95,7 +95,7 @@ const CreateChannel = ({ channelForm, setChannelForm, rooms }) => {
   );
 };
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   rooms: store.connectedRooms,
 });
 
