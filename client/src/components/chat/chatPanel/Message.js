@@ -155,7 +155,9 @@ const Message = ({
             {messages[chatName] ? renderMessages : null}
           </div>
           {typingUsers}
+
           <Emoji emoji={emoji} setEmoji={setEmoji} setMessage={setMessage} />
+
           <div className="communication">
             <motion.form
               initial={{ opacity: 0 }}
