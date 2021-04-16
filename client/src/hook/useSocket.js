@@ -8,14 +8,14 @@ import {
   setAllUsers,
   setNotification,
   setTyping,
-  newChannels,
+  newChannels
 } from "../actions/index";
 // recieve sound
 import recieve from "../assets/recieve.mp3";
 
 let socket;
 
-export const useCreateSocket = (user) => {
+export const useCreateSocket = user => {
   const dispatch = useDispatch();
   const [, , joinRoom] = useSocket();
   const recieveAudio = new Audio(recieve);
@@ -31,8 +31,8 @@ export const useCreateSocket = (user) => {
     socket.emit("join", user);
     joinRoom("general", true);
 
-    socket.on("channels", (channels) => dispatch(newChannels(channels)));
-    socket.on("new user", (allUsers) => dispatch(setAllUsers(allUsers)));
+    socket.on("channels", channels => dispatch(newChannels(channels)));
+    socket.on("new user", allUsers => dispatch(setAllUsers(allUsers)));
     socket.on("new message", ({ chatName, ...res }) => {
       // play recieve sound
       recieveAudio.play();
@@ -50,16 +50,16 @@ export const useCreateSocket = (user) => {
 export const useSocket = () => {
   const dispatch = useDispatch();
 
-  const sendMessage = (payload) => socket.emit("send message", payload);
+  const sendMessage = payload => socket.emit("send message", payload);
 
-  const isTyping = (payload) => socket.emit("is typing", payload);
+  const isTyping = payload => socket.emit("is typing", payload);
 
   const joinRoom = (channelName, allMessage) =>
     socket.emit("join room", channelName, (messages, roomName) =>
       dispatch(setMessages(messages, roomName, allMessage))
     );
 
-  const createRoom = (room) => {
+  const createRoom = room => {
     socket.emit("create room", room);
     joinRoom(room, true);
   };
