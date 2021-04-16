@@ -101,7 +101,7 @@
   resize: none;
   overflow: hidden;
   outline: none;
-  padding: 5px;
+  padding: 5px 12px;
   font-size: 16px;
   border: none;
   border-radius: 10px 0 0 10px;
@@ -167,7 +167,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  position: absolute;
   color: rgba(30, 190, 113, 0.5);
 }
 
