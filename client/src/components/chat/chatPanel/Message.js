@@ -22,7 +22,7 @@ const Message = ({
   messages,
   typing,
   channels,
-  _id,
+  _id
 }) => {
   const [message, setMessage] = useState("");
   const [emoji, setEmoji] = useState(false);
@@ -52,7 +52,7 @@ const Message = ({
     const newMessages = {
       content,
       sender: username,
-      time,
+      time
     };
     dispatch(setMessages(newMessages, chatName));
 
@@ -61,7 +61,7 @@ const Message = ({
       ...newMessages,
       chatName,
       isChannel,
-      to: isChannel ? chatName : reciever_id,
+      to: isChannel ? chatName : reciever_id
     };
     sendMessage(payload);
 
@@ -71,7 +71,7 @@ const Message = ({
 
   const renderMessages = useMemo(
     () =>
-      messages[chatName].map((_message, i) => (
+      messages[chatName].texts.map((_message, i) => (
         <div
           key={i}
           className={`${_message.sender === username ? "myself" : "other"}`}
@@ -104,7 +104,7 @@ const Message = ({
     const payload = {
       username,
       typing: status,
-      to: isChannel ? chatName : reciever_id,
+      to: isChannel ? chatName : reciever_id
     };
 
     isTyping(payload);
@@ -202,7 +202,7 @@ const mapStateToProps = state => ({
   messages: state.messages,
   typing: state.typing,
   channels: state.channels,
-  _id: state.socket_id,
+  _id: state.socket_id
 });
 
 export default connect(mapStateToProps)(Message);
