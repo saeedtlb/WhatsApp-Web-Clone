@@ -21,8 +21,8 @@ const Contacts = ({
     username,
     currentChat,
     messages,
-    notification,
-  },
+    notification
+  }
 }) => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const Contacts = ({
       const { sender, content } = notification.messages;
       const notif = new Notification("New whats App message", {
         body: `${sender}: ${content}`,
-        icon: "/whatsApp.ico",
+        icon: "/whatsApp.ico"
       });
 
       setTimeout(() => {
@@ -51,12 +51,12 @@ const Contacts = ({
               ? {
                   chatName: chat.username,
                   isChannel: false,
-                  reciever_id: chat._id,
+                  reciever_id: chat._id
                 }
               : {
                   chatName: chat,
                   isChannel: true,
-                  reciever_id: "",
+                  reciever_id: ""
                 };
 
           let style;
@@ -70,8 +70,11 @@ const Contacts = ({
 
           const name = type === "room" ? chat : chat.username;
 
+          console.log(85, messages[name]);
+
           const chats = messages[name];
-          const text = chats ? chats[chats.length - 1] : "";
+          const text = chats ? chats.texts.slice(-1)[0] : "";
+          const unread = chats ? chats.unread : "";
 
           return (
             <div
@@ -82,8 +85,9 @@ const Contacts = ({
               <UserIcon
                 name={type === "user" ? chat.username : chat}
                 type="message"
-                isChannel={isRoom}
                 text={text}
+                unread={unread}
+                isChannel={isRoom}
                 status={type === "newRoom" ? "You are not joined yet" : ""}
               />
             </div>
