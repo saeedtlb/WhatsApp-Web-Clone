@@ -15,7 +15,7 @@ const initialStore = {
     permission: false,
   },
   messages: {
-    general: [],
+    general: { unread: 0, texts: [] },
   },
   currentChat: {
     isChannel: true,
