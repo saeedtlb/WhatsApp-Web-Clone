@@ -76,6 +76,10 @@
   line-height: 1.5rem;
 }
 
+.userBox__right .time {
+  white-space: nowrap;
+}
+
 .userBox__right .unread {
   margin-top: 5px;
   background-color: #1ebe71;
