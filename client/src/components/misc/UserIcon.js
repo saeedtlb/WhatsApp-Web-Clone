@@ -2,7 +2,7 @@ import { useMemo } from "react";
 // style
 import "../../styles/Css/userIcon.css";
 
-const UserIcon = ({ name, url, status, text, type, isChannel }) => {
+const UserIcon = ({ name, url, status, text, type, isChannel, unread }) => {
   const randomColorGenerator = useMemo(
     () => Math.floor(Math.random() * 16777215).toString(16),
     []
@@ -31,7 +31,12 @@ const UserIcon = ({ name, url, status, text, type, isChannel }) => {
         <div className="userBox__right">
           <span className="time">{text ? text.time : null}</span>
           <br />
-          <span className="unread">2</span>
+          <span
+            className="unread"
+            style={{ display: `${unread ? "initial" : "none"}` }}
+          >
+            {unread > 0 && unread}
+          </span>
         </div>
       )}
     </div>
