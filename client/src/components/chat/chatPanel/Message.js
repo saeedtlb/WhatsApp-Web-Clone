@@ -16,7 +16,7 @@ const Message = ({
   channels,
   _id
 }) => {
-  const [emoji, setEmoji] = useState(false);
+  //   const [emoji, setEmoji] = useState(false);
   const scrollRef = useRef();
 
   useEffect(() => {
@@ -63,15 +63,15 @@ const Message = ({
     ) : null;
   }, [typing, _id, chatName, isChannel]);
 
-  const handleEmojiPicker = (e, open = false) => {
-    e.preventDefault();
+  //   const handleEmojiPicker = (e, open = false) => {
+  //     e.preventDefault();
 
-    open && setEmoji(true);
-    if (emoji && !open) setEmoji(false);
-  };
+  //     open && setEmoji(true);
+  //     if (emoji && !open) setEmoji(false);
+  //   };
 
   return (
-    <div className="message" onClick={handleEmojiPicker}>
+    <div className="message">
       {channels.includes(chatName) ? (
         <JoinChannel chatName={chatName} />
       ) : (
@@ -82,9 +82,9 @@ const Message = ({
           {typingUsers}
 
           <MessageForm
-            emoji={emoji}
-            setEmoji={setEmoji}
-            handleEmojiPicker={handleEmojiPicker}
+          // emoji={emoji}
+          // setEmoji={setEmoji}
+          // handleEmojiPicker={handleEmojiPicker}
           />
         </>
       )}
