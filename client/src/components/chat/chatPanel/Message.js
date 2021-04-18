@@ -1,73 +1,28 @@
 import { useState, useMemo, useEffect, useRef } from "react";
+import MessageForm from "../../misc/message/MessageForm";
 // helpers
-import { handleBackSpace } from "../../misc/helpers";
 import JoinChannel from "../../misc/message/JoinChannel";
-import Emoji from "../../misc/message/Emoji";
-// style
-import "../../../styles/Css/message.css";
-import { ReactComponent as Microphone } from "../../../styles/icons/microphone.svg";
-// redux Store
-import { connect, useDispatch } from "react-redux";
-import { setMessages } from "../../../actions";
-// custom hook
-import { useSocket } from "../../../hook/useSocket";
+import { connect } from "react-redux";
 // animate
 import { motion } from "framer-motion";
-// send audio
-import audio from "../../../assets/send.wav";
+// style
+import "../../../styles/Css/message.css";
 
 const Message = ({
-  currentChat: { isChannel, chatName, reciever_id },
+  currentChat: { isChannel, chatName },
   username,
   messages,
   typing,
   channels,
   _id
 }) => {
-  const [message, setMessage] = useState("");
   const [emoji, setEmoji] = useState(false);
-  const [sendMessage, isTyping] = useSocket();
-  const dispatch = useDispatch();
   const scrollRef = useRef();
-  const dateOptions = ["en-US", { hour: "2-digit", minute: "2-digit" }];
-  const sendAudio = new Audio(audio);
 
   useEffect(() => {
     if (scrollRef.current)
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, [messages]);
-
-  const handleSendMessage = () => {
-    const content = message.trim();
-    // is empty?
-    if (!content) return;
-
-    // play a sending sound
-    sendAudio.play();
-
-    // get time
-    const time = new Date().toLocaleTimeString(...dateOptions);
-
-    // create a new messages to store
-    const newMessages = {
-      content,
-      sender: username,
-      time
-    };
-    dispatch(setMessages(newMessages, chatName));
-
-    // send message information to server
-    const payload = {
-      ...newMessages,
-      chatName,
-      isChannel,
-      to: isChannel ? chatName : reciever_id
-    };
-    sendMessage(payload);
-
-    // clear the message box
-    setMessage("");
-  };
 
   const renderMessages = useMemo(
     () =>
@@ -87,28 +42,6 @@ const Message = ({
       )),
     [username, chatName, isChannel, messages]
   );
-
-  const handleKeyPress = e => {
-    if (e.key === "Enter") {
-      if (e.shiftKey) {
-        const { rows } = e.target;
-        e.target.rows = rows < 4 ? rows + 1 : rows;
-      } else {
-        e.preventDefault();
-        handleSendMessage();
-      }
-    }
-  };
-
-  const typingStatus = status => {
-    const payload = {
-      username,
-      typing: status,
-      to: isChannel ? chatName : reciever_id
-    };
-
-    isTyping(payload);
-  };
 
   const typingUsers = useMemo(() => {
     const to = isChannel ? chatName : _id;
@@ -137,14 +70,6 @@ const Message = ({
     if (emoji && !open) setEmoji(false);
   };
 
-  const recording = (e, status = false) => {
-    if (status) {
-      e.target.classList.add("active");
-    } else {
-      e.target.classList.remove("active");
-    }
-  };
-
   return (
     <div className="message" onClick={handleEmojiPicker}>
       {channels.includes(chatName) ? (
@@ -156,39 +81,11 @@ const Message = ({
           </div>
           {typingUsers}
 
-          <Emoji emoji={emoji} setEmoji={setEmoji} setMessage={setMessage} />
-
-          <div className="communication">
-            <motion.form
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.9, ease: "easeIn" }}
-            >
-              <textarea
-                name="message"
-                value={message}
-                onChange={e => setMessage(e.target.value)}
-                onKeyPress={handleKeyPress}
-                onKeyDown={handleBackSpace}
-                onFocus={() => typingStatus(true)}
-                onBlur={() => typingStatus(false)}
-              />
-              <div className="btns">
-                <button
-                  className="emoji"
-                  onMouseEnter={e => handleEmojiPicker(e, true)}
-                  onClick={handleEmojiPicker}
-                />
-                <button
-                  className="voice"
-                  onMouseDown={e => recording(e, true)}
-                  onMouseUp={recording}
-                >
-                  <Microphone />
-                </button>
-              </div>
-            </motion.form>
-          </div>
+          <MessageForm
+            emoji={emoji}
+            setEmoji={setEmoji}
+            handleEmojiPicker={handleEmojiPicker}
+          />
         </>
       )}
     </div>
