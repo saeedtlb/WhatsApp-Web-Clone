@@ -69,9 +69,6 @@ const Contacts = ({
             style = "rgba(30, 190, 113, 0.2)";
 
           const name = type === "room" ? chat : chat.username;
-
-          console.log(85, messages[name]);
-
           const chats = messages[name];
           const text = chats ? chats.texts.slice(-1)[0] : "";
           const unread = chats ? chats.unread : "";
