@@ -5,18 +5,18 @@ import "react-twemoji-picker/dist/EmojiPicker.css";
 // animate
 import { motion } from "framer-motion";
 // helper
-import { onEmojiClick } from "../../misc/helpers";
+import { unicodeToEmoji } from "../../misc/helpers";
 
 const emoji_variants = {
   show: { scale: 1, opacity: 1 },
-  hide: { scale: 0, opacity: 0 },
+  hide: { scale: 0, opacity: 0 }
 };
 
 const Emoji = ({ emoji, setEmoji, setMessage }) => {
   const emojiData = Object.freeze(EmojiData);
 
   const selectEmoji = _emoji => {
-    const emj = onEmojiClick(_emoji);
+    const emj = unicodeToEmoji(_emoji);
     setMessage(message => message + emj);
   };
 
