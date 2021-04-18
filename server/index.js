@@ -7,25 +7,25 @@ const server = http.createServer(app);
 const PORT = process.env.PORT || 8080;
 const io = socketio(server, {
   cors: {
-    origin: "http://localhost:3000",
-  },
+    origin: "http://localhost:3000"
+  }
 });
 
 let users = [];
 let isTypingUsers = {
-  general: [],
+  general: []
 };
 const messages = {
-  general: [],
+  general: []
 };
 
 const channels = [];
 
-io.on("connection", (socket) => {
-  socket.on("join", (username) => {
+io.on("connection", socket => {
+  socket.on("join", username => {
     users.push({
       _id: socket.id,
-      username,
+      username
     });
     io.emit("new user", users);
     socket.emit("channels", channels);
@@ -36,7 +36,7 @@ io.on("connection", (socket) => {
     cb(messages[roomName], roomName);
   });
 
-  socket.on("create room", (room) => {
+  socket.on("create room", room => {
     if (!channels.includes(room)) {
       channels.push(room);
       io.emit("channels", channels);
@@ -50,7 +50,7 @@ io.on("connection", (socket) => {
         content,
         sender,
         time,
-        chatName: isChannel ? chatName : sender,
+        chatName: isChannel ? chatName : sender
       };
       socket.to(to).emit("new message", payload);
       if (messages[chatName]) {
@@ -66,13 +66,13 @@ io.on("connection", (socket) => {
       if (isTypingUsers[to]) isTypingUsers[to].push(username);
       else isTypingUsers[to] = [username];
     } else
-      isTypingUsers[to] = isTypingUsers[to].filter((user) => user !== username);
+      isTypingUsers[to] = isTypingUsers[to].filter(user => user !== username);
 
     socket.to(to).emit("typing", isTypingUsers, typing);
   });
 
   socket.on("disconnect", () => {
-    users = users.filter((user) => user._id !== socket.id);
+    users = users.filter(user => user._id !== socket.id);
     io.emit("new user", users);
   });
 });
