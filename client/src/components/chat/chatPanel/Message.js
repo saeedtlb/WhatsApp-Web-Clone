@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useMemo, useEffect, useRef } from "react";
 import MessageForm from "../../misc/message/MessageForm";
 // helpers
 import JoinChannel from "../../misc/message/JoinChannel";
@@ -16,7 +16,6 @@ const Message = ({
   channels,
   _id
 }) => {
-  //   const [emoji, setEmoji] = useState(false);
   const scrollRef = useRef();
 
   useEffect(() => {
@@ -63,13 +62,6 @@ const Message = ({
     ) : null;
   }, [typing, _id, chatName, isChannel]);
 
-  //   const handleEmojiPicker = (e, open = false) => {
-  //     e.preventDefault();
-
-  //     open && setEmoji(true);
-  //     if (emoji && !open) setEmoji(false);
-  //   };
-
   return (
     <div className="message">
       {channels.includes(chatName) ? (
@@ -81,11 +73,7 @@ const Message = ({
           </div>
           {typingUsers}
 
-          <MessageForm
-          // emoji={emoji}
-          // setEmoji={setEmoji}
-          // handleEmojiPicker={handleEmojiPicker}
-          />
+          <MessageForm />
         </>
       )}
     </div>
