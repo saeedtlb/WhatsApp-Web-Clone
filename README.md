@@ -5,7 +5,26 @@ In the Server folder we run our server which it's main job is running socket.io 
 
 ## Features
 
-Create Group - Join Group - Send message in private or in group - Fully responsive - New design & ...
+Create Group - Join Group - Send message in private or in group - play sound when sending a message and recieve - show notification when get message(if you are not on that chat) - Fully responsive - New design & ...
+
+# Screen Shots
+
+## Sign In
+
+![signIn](client/public/screenShots/signin.png)
+
+## Main page
+
+![MainPage](client/public/screenShots/fullwidth.png)
+
+## create Group
+
+![Group](client/public/screenShots/createGroup.png)
+
+## responsive
+
+![responsive1](client/public/screenShots/responsive1.png)
+![responsive2](client/public/screenShots/responsive2.png)
 
 ## Available Scripts
 
