@@ -7,8 +7,15 @@ import { motion } from "framer-motion";
 // style
 import { ReactComponent as Microphone } from "../../../styles/icons/microphone.svg";
 
-const MessageForm = ({ emoji, setEmoji, handleEmojiPicker }) => {
+const MessageForm = () => {
+  const [emoji, setEmoji] = useState(false);
   const [message, setMessage] = useState("");
+
+  const handleEmojiPicker = (e, open = false) => {
+    e.preventDefault();
+
+    open ? setEmoji(true) : setEmoji(!emoji);
+  };
 
   const recording = (e, status = false) => {
     if (status) {
