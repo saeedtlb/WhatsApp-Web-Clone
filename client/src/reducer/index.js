@@ -12,7 +12,7 @@ import {
 } from "../actions/type";
 
 const reducer = (store, action) => {
-  console.log(action);
+  //   console.log(action);
 
   switch (action.type) {
     case SOCKETID:
